@@ -1,18 +1,40 @@
+#include "MakeDustParticle.as";
+
+const f32 thrust = 5;
+const int thrustCutoffReg = 4;
+const f32 weakThrust = 0.75;
+const f32 powerThrust = 4.0;
+
+const u32 recoverTime = getTicksASecond() * 4;
+const u32 afterburnerKickinTime = getTicksASecond();
+
 void onInit( CMovement@ this )
 {
+	CBlob@ blob = this.getBlob();
 	this.getCurrentScript().removeIfTag = "dead";
 	this.getCurrentScript().runFlags |= Script::tick_not_attached;
 
-	CShape@ shape = this.getBlob().getShape();
+	CShape@ shape = blob.getShape();
 	shape.SetGravityScale(0.0f);
+
+	blob.set_f32("fuel", 100.0f);
+	blob.set_u32("lastBoostTime", getGameTime() - getTicksASecond() * 10);
+	blob.set_bool("afterburner", false);
 	
+}
+
+bool canAfterburn(CBlob@ this){
+	return getGameTime() - this.get_u32("afterburntime") > afterburnerKickinTime;
 }
 
 void onTick( CMovement@ this )
 {
 	CBlob@ blob = this.getBlob();
+		f32 fuel = blob.get_f32("fuel");
 
-	if(!blob.hasTag("gravity")){
+	if(!blob.hasTag("nofuel")){
+
+	//print("thrustfuel: " + formatFloat(blob.get_f32("fuel"), ""));
 
 
 		//shape.SetGravityScale(0.0f);
@@ -20,16 +42,48 @@ void onTick( CMovement@ this )
 		const bool right	= blob.isKeyPressed(key_right);
 		const bool up		= blob.isKeyPressed(key_up);
 		const bool down		= blob.isKeyPressed(key_down);
-		const bool cutoff	= blob.isKeyPressed(key_down);
+		const bool boost	= blob.isKeyJustPressed(key_taunts);
+
+		bool afterburner = blob.get_bool("afterburner");
+
+		if(boost){
+			afterburner = !afterburner;
+
+			if(afterburner){
+				blob.set_u32("afterburntime", getGameTime());
+				blob.getSprite().PlaySound("PowerUp.ogg", 2.0);
+				
+			}
+			else{
+				blob.getSprite().PlaySound("PowerDown.ogg", 2.0);
+			}
+			blob.set_bool("afterburner", afterburner);
+			
+		}
+		//const bool cutoff	= blob.isKeyPressed(key_down);
 
 		Vec2f vel = blob.getVelocity();
 
 		
 
-		f32 thrustAmount = 5;
-		int thrustCutoff = 4;
-		f32 weakThrust = 0.75;
-		f32 powerThrust = 4.0;
+		f32 thrustAmount = thrust;
+		f32 thrustCutoff = thrustCutoffReg;
+
+
+		if(getGameTime() - blob.get_u32("afterburntime") == afterburnerKickinTime){
+			ParticleZombieLightning(blob.getPosition());
+
+		}
+		
+		bool canBurn = canAfterburn(blob);
+
+		if(afterburner && canBurn  ){
+			thrustAmount *= 3;
+			thrustCutoff *= 3;
+		}
+		/*else if(afterburner && !canBurn
+			&& getGameTime() % 10 == 0){
+		}*/
 
 
 		CBlob@ carryBlob = blob.getCarriedBlob();
@@ -92,7 +146,20 @@ void onTick( CMovement@ this )
 			else if( vel.y < 0)
 				modifier = powerThrust;
 
-			blob.AddForce(Vec2f(0, modifier * thrustAmount * 1.35));
+			blob.AddForce(Vec2f(0, modifier * thrustAmount * 1.30));
+		}
+		
+		if(afterburner && canBurn){
+			fuel -= 0.70;
+			//blob.set_u32("lastBoostTime", getGameTime());
+		}
+		else if(left || right || up || down){
+
+			fuel -= 0.30;
+		}
+		
+		if(afterburner && getGameTime() % 10 == 0){
+			MakeDustParticle( blob.getPosition(), "Smoke.png");
 		}
 
 		/*string x = formatFloat(vel.x, "");
@@ -102,5 +169,45 @@ void onTick( CMovement@ this )
 		printf("X: " + formatFloat(vel.x, ""));
 		printf("Y: " + formatFloat(vel.y, ""));*/
 	}
+
+	u32 timeSinceBoost = getGameTime() - blob.get_u32("lastBoostTime");
+	
+	if(timeSinceBoost > recoverTime / 2){
+
+		if(fuel < 100.0){
+			fuel += 0.25;
+		}
+		else if(fuel > 100.0){
+			fuel = 100.0;
+		}
+
+	}
+	
+	if(timeSinceBoost > recoverTime){
+		blob.Untag("nofuel");
+	}
+	
+	if(fuel < 0 && !blob.hasTag("nofuel")){
+		fuel = 0.0;
+		//MakeDustParticle( blob.getPosition(), "Smoke.png");
+		blob.getSprite().PlaySound("PowerDown.ogg", 2.0);
+		blob.set_u32("lastBoostTime", getGameTime());
+		blob.Tag("nofuel");
+		blob.set_bool("afterburner", false);
+	}
+	
+	if(blob.hasTag("nofuel") && getGameTime() % 10 == 0){ 
+		MakeDustParticle( blob.getPosition(), "Smoke.png");
+		if(blob.isMyPlayer() && getGameTime() % 40 == 0){
+			Sound::Play("depleted.ogg");
+
+		}
+	}
+
+	if(blob.isMyPlayer() && getGameTime() % 30 == 0 && !blob.hasTag("nofuel") &&
+	  fuel <= 12.5){
+		Sound::Play("depleting.ogg");
+	  }
 		
+	blob.set_f32("fuel", fuel);
 }
