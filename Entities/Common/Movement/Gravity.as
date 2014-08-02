@@ -13,9 +13,9 @@ void onTick(CBlob@ this){
 		}
 
 		f32 radius = 8 * generator.get_u8("grav_radius");
-		f32 width = generator.getWidth() / 2;
+		f32 width = generator.getWidth();
 
-		if(Maths::Abs(generator.getPosition().x - this.getPosition().x) > width || 
+		if(Maths::Abs(generator.getPosition().x - this.getPosition().x) > width / 2 || 
 		   this.getDistanceTo(generator) > radius){
 			this.Untag("gravityVertical");
 			return;

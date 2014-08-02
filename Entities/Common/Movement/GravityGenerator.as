@@ -9,13 +9,18 @@ void onTick (CBlob@ this){
 		for(uint i = 0; i < blobs.length; i++){
 			CBlob@ blob = blobs[i];
 			Vec2f blobPos = blobs[i].getPosition();
+			/*if(!(blob.getName() == this.getName())){
+				print("inradius");
+			}*/
+			if(this.hasTag("team_gravity") && blob.getTeamNum() == this.getTeamNum()){
+				continue;
+			}
 			if(!(blob.hasTag("gravity") || blob.hasTag("gravityVertical")) &&
 				Maths::Abs(blobPos.x - pos.x) <= width / 2 &&
 				(pos.y + height/2) + 8 >= blobPos.y 
 			){
 				blob.Tag("gravityVertical");
 				blob.set_netid("generator", this.getNetworkID());
-				print("gravset");
 			}
 
 

@@ -31,6 +31,7 @@ void onTick( CMovement@ this )
 		f32 weakThrust = 0.75;
 		f32 powerThrust = 4.0;
 
+
 		CBlob@ carryBlob = blob.getCarriedBlob();
 		if (carryBlob !is null)
 		{

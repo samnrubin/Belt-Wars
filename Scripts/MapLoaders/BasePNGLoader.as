@@ -951,7 +951,8 @@ class PNGLoader
 		// plains
 
 		map.AddBackground( "Sprites/Back/Stars.png", Vec2f(0.0f, 0.0f), Vec2f(0.2, 0.2), color_white ); 
-		map.AddBackground( "Sprites/Back/Stars2.png", Vec2f(0.0f, 0.0f), Vec2f(0.22, 0.22), color_white ); 
+		map.AddBackground( "Sprites/Back/Stars2.png", Vec2f(0.0f, 0.0f), Vec2f(0.23, 0.23), color_white ); 
+		map.AddBackground( "Sprites/Back/Saturn.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
 		//map.AddBackground( "Sprites/Back/BackgroundTrees.png", Vec2f(0.0f,  -5.0f), Vec2f(0.4f, 0.4f), color_white ); 
 		//map.AddBackground( "Sprites/Back/BackgroundIsland.png", Vec2f(0.0f, 0.0f), Vec2f(0.6f, 0.6f), color_white ); 
 		//map.AddBackground( "Sprites/Back/BackgroundCastle.png", Vec2f(0.0f, 73.0f), Vec2f(0.6f, 0.6f), color_white ); 

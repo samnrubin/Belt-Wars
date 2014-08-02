@@ -13,8 +13,9 @@ void onInit( CBlob@ this )
 	this.addCommandID(toggle_id);
 	this.addCommandID(grav_id);
 	this.addCommandID(sawteammate_id);
-	this.set_u8("grav_radius", 10);
-	this.set_f32("grav_generator_intensity", 0.5);
+	this.set_u8("grav_radius", 12);
+	this.set_f32("grav_generator_intensity", 0.4);
+	this.Tag("team_gravity");
 
 	SetSawOn(this, true);
 }
@@ -49,10 +50,10 @@ void GetButtonsFor( CBlob@ this, CBlob@ caller )
 	}
 	
 	string desc = "Turn Saw "+(getSawOn(this) ? "Off" : "On");
-	caller.CreateGenericButton( 8, Vec2f(-8,0), this, this.getCommandID(toggle_id), desc );
+	caller.CreateGenericButton( 8, Vec2f(-10,0), this, this.getCommandID(toggle_id), desc );
 	
 	string desc2 = ((getGravOn(this) ? "Deactivate" : "Activate") + " vertical grav field");
-	caller.CreateGenericButton( 8, Vec2f(8,0), this, this.getCommandID(grav_id), desc2 );
+	caller.CreateGenericButton( 8, Vec2f(10,0), this, this.getCommandID(grav_id), desc2 );
 }
 
 void onCommand( CBlob@ this, u8 cmd, CBitStream @params )

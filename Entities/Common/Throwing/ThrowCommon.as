@@ -29,6 +29,9 @@ void client_SendThrowCommand( CBlob@ this )
 					Vec2f vel = getThrowVelocity( this, this.getAimPos() - this.getPosition(), this.getVelocity(),  this.get_f32( "throw ourvel scale") );
 			f32 throwerMass = this.getMass();
 			f32 thrownMass = carried.getMass();
+			if(thrownMass > 68.0f){
+				thrownMass = 68.0f;
+			}
 			Vec2f deltaV = vel * (thrownMass/throwerMass);
 			//print("before: " + formatFloat(vel.x, "") + " " + formatFloat(vel.y, ""));
 			this.setVelocity(this.getVelocity() -= deltaV);

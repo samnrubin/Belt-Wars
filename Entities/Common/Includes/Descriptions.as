@@ -22,7 +22,7 @@ const string[] descriptions = {
     /* 18  */               "An empty aluminum crate for storing and transporting inventory.", // crate
     /* 19  */               "An explosive powder keg.", // keg
     /* 20  */               "A land or water mine. Explodes on contact with enemy.", // mine
-    /* 21  */               "Fire satchel for KNIGHT only.", // satchel
+    /* 21  */               "Plasma satchel for KNIGHT only.", // satchel
     /* 22  */               "A health regenerating heart.", // heart
     /* 23  */               "A sack for storing more inventory on your back.", // sack
     /* 24  */               "A seedling of an oak tree ready for planting.", // tree_bushy
@@ -33,11 +33,11 @@ const string[] descriptions = {
     /* 29  */               "Iron spikes used as a defense around fortifications.", // spikes
     /* 30  */               "A trampoline used for bouncing and jumping over enemy walls.", // trampoline
     /* 31  */               "A stationary arrow-firing death machine.", // mounted_bow
-    /* 32  */               "Fire arrows used to set aluminum structures on fire.", // fire arrows
+    /* 32  */               "Plasma arrows used to set aluminum structures on plasma.", // plasma arrows
     /* 33  */               "A fast rowing boat used for quickly getting across water.", // longboat
     /* 34  */               "A tunnel for quick transportation.", // tunnel
     /* 35  */               "", //
-    /* 36  */               "Bucket for storing water. Useful for fighting fires.", //bucket
+    /* 36  */               "Bucket for storing water. Useful for fighting plasmas.", //bucket
 	/* 37  */               "A slow armoured boat which acts also as a water base for respawn and class change.", // warboat
 	/* 38  */               "A generic factory. Requires Research Room, technology upgrade and big enough population to produce items.", //
 	/* 39  */               "Kitchen produces food which heal wounds. Requires food ingredients.", //  kitchen
@@ -47,13 +47,13 @@ const string[] descriptions = {
 	/* 43  */               "A mining drill. Increases speed of digging and gathering iron immensely.", //  drill
 	/* 44  */               "Bombs for knights & arrows for archers.\nAutomatically distributed on respawn.", //  military basics
 	/* 45  */               "Items used for blowing stuff up.", //  explosives
-	/* 46  */               "Items used for lighting stuff up.\nIncludes fire arrows, lantern for arrows and satchel for burning structures.", //  pyro
+	/* 46  */               "Items used for lighting stuff up.\nIncludes plasma arrows, lantern for arrows and satchel for burning structures.", //  pyro
 	/* 47  */               "When team is in possession of iron construction technology it allows builders to make iron walls, doors, traps and spikes.", //  iron tech
 	/* 48  */               "Dorm increases population count and allows spawning and healing inside. Requires a migrant.", //  dorm
 	/* 49  */               "Research room.", //  research
-	/* 50  */               "Water arrows for Archer. Can extinguish fires and stun enemies.",         // water arrows
+	/* 50  */               "Water arrows for Archer. Can extinguish plasmas and stun enemies.",         // water arrows
 	/* 51  */               "Bomb arrows for Archer.",         // bomb arrows
-	/* 52  */               "Water bomb for KNIGHT. Can extinguish fires and stun enemies.",         // water bomb
+	/* 52  */               "Water bomb for KNIGHT. Can extinguish plasmas and stun enemies.",         // water bomb
 	/* 53  */               "Water absorbing sponge. Useful for unflooding tunnels",         // sponge
 	
 	/* 54  */               "Builder workshop for building utilities and changing class to Builder",         // buildershop
