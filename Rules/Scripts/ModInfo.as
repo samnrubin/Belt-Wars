@@ -40,7 +40,7 @@ int lastPick = 0;
 void onTick(CRules@ this){
 	if(lastMessageTime == 0){
 		lastMessageTime = getGameTime();
-		client_AddToChat("Welcome to Belter Wars! v.(0.5)", M_COLOR);
+		client_AddToChat("Welcome to Belter Wars! v.(0.55)", M_COLOR);
 		client_AddToChat("A asteroid belt mod prototype designed and developed by Nand", M_COLOR);
 	}
 
