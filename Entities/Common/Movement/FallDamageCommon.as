@@ -6,7 +6,7 @@
 
 f32 BaseFallSpeed()
 {
-    const f32 BASE_FALL_VEL = 12.0f;
+    const f32 BASE_FALL_VEL = 9.0f;
     return getRules().exists("fall vel modifier") ? getRules().get_f32("fall vel modifier") * BASE_FALL_VEL : BASE_FALL_VEL;
 }
 

@@ -5,7 +5,7 @@ const int thrustCutoffReg = 4;
 const f32 weakThrust = 0.75;
 const f32 powerThrust = 4.0;
 
-const u32 recoverTime = getTicksASecond() * 4;
+const u32 recoverTime = getTicksASecond() * 6;
 const u32 afterburnerKickinTime = getTicksASecond();
 
 void onInit( CMovement@ this )
@@ -23,6 +23,14 @@ void onInit( CMovement@ this )
 	
 }
 
+void thrustedOut(CBlob@ this){
+	Vec2f pos = this.getPosition();
+
+	if(pos.y < 0){
+		this.setPosition(Vec2f(pos.x, pos.y + 40));
+	}
+}
+
 bool canAfterburn(CBlob@ this){
 	return getGameTime() - this.get_u32("afterburntime") > afterburnerKickinTime;
 }
@@ -30,7 +38,9 @@ bool canAfterburn(CBlob@ this){
 void onTick( CMovement@ this )
 {
 	CBlob@ blob = this.getBlob();
-		f32 fuel = blob.get_f32("fuel");
+
+	thrustedOut(blob);
+	f32 fuel = blob.get_f32("fuel");
 
 	if(!blob.hasTag("nofuel")){
 
@@ -78,7 +88,7 @@ void onTick( CMovement@ this )
 		bool canBurn = canAfterburn(blob);
 
 		if(afterburner && canBurn  ){
-			thrustAmount *= 3;
+			thrustAmount *= 2;
 			thrustCutoff *= 3;
 		}
 		/*else if(afterburner && !canBurn
@@ -150,7 +160,7 @@ void onTick( CMovement@ this )
 		}
 		
 		if(afterburner && canBurn){
-			fuel -= 0.70;
+			fuel -= 0.90;
 			//blob.set_u32("lastBoostTime", getGameTime());
 		}
 		else if(left || right || up || down){

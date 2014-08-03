@@ -15,22 +15,24 @@ void onRender( CSprite@ this )
 
 	CBlob@ blob = this.getBlob();
 	
-	int yTop = getScreenHeight() - 330 * 2 - 20;
+	f32 factor = getScreenHeight() > 768 ? 1.0 : 0.5;
+	
+	int yTop = getScreenHeight() - (330 * 2) * factor - 20;
 	Vec2f ul = Vec2f(20, yTop);
-	f32 factor = 1.0;
 	
 	f32 perc = blob.get_f32("fuel");
 	//print(formatFloat(perc, ""));
 
 	GUI::DrawIcon(fuelFilename, 0, Vec2f(32, 330), ul, factor);
 	if(perc >= 0.0f){
-			GUI::DrawRectangle( ul + Vec2f(8, 638 - 6* perc), ul + Vec2f(48+8, 638), SColor(0xff690000) );
-			GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, 628 - 6* perc), factor);
+			GUI::DrawRectangle( ul + Vec2f(8 * factor, (638 - 6* perc) * factor), ul + Vec2f((48 +8) * factor, 638 * factor), SColor(0xff690000) );
+			GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, (628 - 6* perc) * factor), factor);
 	}
+
 	GUI::DrawIcon(fuelFilename, 1, Vec2f(32, 330), ul, factor);
 
 	//Bottom
-	GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, 628), factor);
+	GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, 628 * factor), factor);
 
 	if(blob.get_bool("afterburner") && !canAfterburn(blob)){
 		GUI::DrawText("Afterburner\n  Charging", ul + Vec2f(-10, -34), color_white);
@@ -52,7 +54,7 @@ void onRender( CSprite@ this )
 		else
 			textcolor = SColor(0xff690000);
 			
-		GUI::DrawText("Out of\n  Fuel!", ul + Vec2f(-10, -34), textcolor);
+		GUI::DrawText("Out of\n Fuel!", ul + Vec2f(9, -34), textcolor);
 
 	}
 

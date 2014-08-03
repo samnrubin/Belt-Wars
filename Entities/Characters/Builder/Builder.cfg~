@@ -13,7 +13,6 @@ $sprite_factory                                   = generic_sprite
 													RunnerHead.as;
 													DefaultActorHUD.as;													
 													BuilderHUD.as;
-													FuelHUD.as;
 													RunnerFootSteps.as;
 													DazzleAnimation.as;
 													RunnerDrowning.as;

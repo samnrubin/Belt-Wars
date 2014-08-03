@@ -8,7 +8,6 @@ u32 lastMessageTime = 0;
 string[] chats = {"Coming soon: AI Controlled Space Stations",
 				 "Coming soon: New Sprites",
 				 "Coming soon: Lazer Guns Pew Pew",
-				 "Coming soon: Fuel Tank w/ Afterburner",
 				 "Coming later: Pilotable Space Ships",
 				 "Coming soon: More Backgrounds",
 				 "Coming soon: New Futuristic Theme",
@@ -25,6 +24,11 @@ string[] chats = {"Coming soon: AI Controlled Space Stations",
 				 "Frozen with a red circle? IT'S MY FAULT, help me fix the bug by sending me (Nand) your latest console log",
 				 "This mod was created and designed by Nand",
 				 "This mod was created and designed by Nand",
+				 "Press your \"taunts\" key to activate/deactivate your afterburner (Default: \'V\')",
+				 "Press your \"taunts\" key to activate/deactivate your afterburner (Default: \'V\')",
+				 "Press your \"taunts\" key to activate/deactivate your afterburner (Default: \'V\')",
+				 "You can rebind your afterburner key in the settings, just change what key \"taunts\" is set to",
+				 "You can rebind your afterburner key in the settings, just change what key \"taunts\" is set to"
 				 };
 
 int lastPick = 0;
@@ -34,7 +38,7 @@ int lastPick = 0;
 void onTick(CRules@ this){
 	if(lastMessageTime == 0){
 		lastMessageTime = getGameTime();
-		client_AddToChat("Welcome to Belter Wars! v.(0.2)", M_COLOR);
+		client_AddToChat("Welcome to Belter Wars! v.(0.5)", M_COLOR);
 		client_AddToChat("A asteroid belt mod prototype designed and developed by Nand", M_COLOR);
 	}
 
