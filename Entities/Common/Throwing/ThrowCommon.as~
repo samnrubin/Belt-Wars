@@ -15,7 +15,7 @@ void client_SendThrowOrActivateCommand( CBlob@ this )
         this.SendCommand( this.getCommandID("activate/throw"), params );
     }
 
-	if(!(carried.getName() == "keg")){
+	if(!(carried.getName() == "keg" && carried.hasTag("activated"))){
 		newtonianKickback(this, carried);
 	}
 }

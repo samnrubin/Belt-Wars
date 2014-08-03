@@ -25,10 +25,7 @@ void onInit( CBlob@ this )
 void SetSawOn(CBlob@ this, const bool on)
 {
 	this.set_bool("saw_on", on);
-	if(on)
-		this.Tag("gravOn");
-	else
-		this.Untag("gravOn");
+	this.Tag("gravOn");
 }
 
 bool getSawOn(CBlob@ this)

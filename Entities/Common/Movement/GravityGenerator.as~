@@ -1,13 +1,10 @@
 void onTick (CBlob@ this){
 	//Carried blobs shouldn't generate gravity
-	if(this.isAttached()){
-		this.Tag("carried");
-	}
-	else if(this.hasTag("carried")){
-		this.Untag("carried");
+	if(this.isAttached() && this.hasTag("gravOn")){
+		this.Untag("gravon");
 	}
 
-	if(!this.hasTag("gravOn") || this.hasTag("carried")){
+	if(!this.hasTag("gravOn")){
 		return;
 	}
 

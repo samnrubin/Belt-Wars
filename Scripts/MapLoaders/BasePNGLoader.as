@@ -952,7 +952,34 @@ class PNGLoader
 
 		map.AddBackground( "Sprites/Back/Stars.png", Vec2f(0.0f, 0.0f), Vec2f(0.2, 0.2), color_white ); 
 		map.AddBackground( "Sprites/Back/Stars2.png", Vec2f(0.0f, 0.0f), Vec2f(0.23, 0.23), color_white ); 
-		map.AddBackground( "Sprites/Back/Saturn.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
+
+		u8 background = XORRandom(6);
+
+		switch (background){
+			case 0:
+				map.AddBackground( "Sprites/Back/Sun.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
+				break;
+			case 1:
+				map.AddBackground( "Sprites/Back/Pluto.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
+				map.AddBackground( "Sprites/Back/Charon.png", Vec2f(0.0f, 0.0f), Vec2f(0.31, 0.31), color_white ); 
+				break;
+			case 2:
+				map.AddBackground( "Sprites/Back/Sun.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
+				map.AddBackground( "Sprites/Back/Mercury.png", Vec2f(0.0f, 0.0f), Vec2f(0.31, 0.31), color_white ); 
+				break;
+			case 3:
+				map.AddBackground( "Sprites/Back/Saturn.png", Vec2f(0.0f, 0.0f), Vec2f(0.285, 0.285), color_white ); 
+				break;
+			case 4:
+				map.AddBackground( "Sprites/Back/JupiterMoons1.png", Vec2f(0.0f, 0.0f), Vec2f(0.24, 0.24), color_white ); 
+				map.AddBackground( "Sprites/Back/Jupiter.png", Vec2f(0.0f, 0.0f), Vec2f(0.27, 0.27), color_white ); 
+				map.AddBackground( "Sprites/Back/JupiterMoons2.png", Vec2f(0.0f, 0.0f), Vec2f(0.31, 0.31), color_white );
+				break;
+		}
+		
+
+		//map.AddBackground( "Sprites/Back/SunSmall.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
+		//map.AddBackground( "Sprites/Back/Mars.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 	
 		//map.AddBackground( "Sprites/Back/BackgroundTrees.png", Vec2f(0.0f,  -5.0f), Vec2f(0.4f, 0.4f), color_white ); 
 		//map.AddBackground( "Sprites/Back/BackgroundIsland.png", Vec2f(0.0f, 0.0f), Vec2f(0.6f, 0.6f), color_white ); 
 		//map.AddBackground( "Sprites/Back/BackgroundCastle.png", Vec2f(0.0f, 73.0f), Vec2f(0.6f, 0.6f), color_white ); 
