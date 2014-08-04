@@ -5,7 +5,7 @@ void onTick(CBlob@ this){
 		shape.SetGravityScale(0.0f);
 	}
 	else if(this.hasTag("gravityVertical")){
-		// Generator challenges: First check to see the blob exists/is alive, then check radius/position
+		// Generator challenges: First check to see the blob exists/is alive, then check radius/position, then check to make sure it's not currently carried
 		CBlob@ generator = getBlobByNetworkID(this.get_netid("generator"));
 		if(generator is null || generator.hasTag("dead") || !generator.hasTag("gravOn") || generator.hasTag("carried")){
 			this.Untag("gravityVertical");

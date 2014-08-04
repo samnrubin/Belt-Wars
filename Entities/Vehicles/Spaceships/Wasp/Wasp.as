@@ -1,4 +1,5 @@
 //#include "VehicleCommon.as"
+#include "Explosion.as"
 
 // Boat logic
 
@@ -23,14 +24,17 @@ void onInit(CBlob@ this )
 	this.set_u32("thrustCutoffReg", 4);
 	this.getShape().SetRotationsAllowed(false);
 	this.Tag("facecursor");
+	this.set_Vec2f("fireoffset0", Vec2f(-6, -2));
+	this.set_Vec2f("fireoffset1", Vec2f(-6, 3));
+	this.set_string("lasertype", "laserwasp");
+	this.set_u16("firedelay", getTicksASecond() * .5);
+	this.set_u8("numguns", 2);
 }
+
 
 bool canBePickedUp( CBlob@ this, CBlob@ byBlob )
 {
 	return false;
-    /*return !this.hasAttached() &&
-			(!this.isInWater() || this.isOnMap()) &&
-			this.getOldVelocity().LengthSquared() < 4.0f;*/
 }
 
 /*void Vehicle_onFire( CBlob@ this, VehicleInfo@ v, CBlob@ bullet, const u8 charge ) {}
@@ -52,13 +56,16 @@ void onAttach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint )
 		return;
 	}
 	Vehicle_onAttach( this, v, attached, attachedPoint );*/
+	this.SetDamageOwnerPlayer( attached.getPlayer() );
+	attached.DropCarried();
+	attached.Tag("invincible");
 }
 
-void onDetach( CBlob@ this, CBlob@ detached, AttachmentPoint@ attachedPoint )
+void onDetach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint )
 {
-	/*VehicleInfo@ v;
-	if (!this.get( "VehicleInfo", @v )) {
-		return;
-	}
-	Vehicle_onDetach( this, v, detached, attachedPoint );*/
-}		
+	attached.Untag("invincible");
+}
+
+void onDie( CBlob@ this){
+	Explode(this, 40.0f, 4.0f);
+}

@@ -58,7 +58,7 @@ void onInit( CBlob@ this )
 	}
 	else if(name == "mat_gold"){
 		this.SetLight(true);
-		this.SetLightRadius(48.0f);
+		this.SetLightRadius(24.0f);
 		this.SetLightColor(SColor(255, 48, 170, 29));
 	}
 

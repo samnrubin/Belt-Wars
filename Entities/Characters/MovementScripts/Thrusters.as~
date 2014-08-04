@@ -3,7 +3,7 @@
 const f32 thrust = 5;
 const int thrustCutoffReg = 4;
 const f32 weakThrust = 0.75;
-const f32 powerThrust = 4.0;
+const f32 powerThrustReg = 4.0;
 
 const u32 recoverTime = getTicksASecond() * 6;
 const u32 afterburnerKickinTime = getTicksASecond();
@@ -40,7 +40,7 @@ void onTick( CMovement@ this )
 	CBlob@ blob = this.getBlob();
 
 	thrustedOut(blob);
-		f32 fuel = blob.get_f32("fuel");
+	f32 fuel = blob.get_f32("fuel");
 
 	if(!blob.hasTag("nofuel")){
 
@@ -78,22 +78,32 @@ void onTick( CMovement@ this )
 
 		f32 thrustAmount = thrust;
 		f32 thrustCutoff = thrustCutoffReg;
+		f32 powerThrust = powerThrustReg;
 
 
 		if(getGameTime() - blob.get_u32("afterburntime") == afterburnerKickinTime){
 			ParticleZombieLightning(blob.getPosition());
+			Vec2f vel = blob.getVelocity();
+			vel.Normalize();
+			blob.setVelocity(vel * 10.0);
 
 		}
 		
-		bool canBurn = canAfterburn(blob);
+		bool afterburning = afterburner && canAfterburn(blob);
 
-		if(afterburner && canBurn  ){
-			thrustAmount *= 2;
-			thrustCutoff *= 3;
+		if(afterburning){
+			/*thrustAmount *= 2;
+			thrustCutoff *= 8;
+			powerThrust *= 12;
+			if(!(left || right || up || down)){
+				Vec2f vel = blob.getVelocity();
+				vel.Normalize();
+				blob.AddForce(vel * 16.0);
+			}*/
 		}
-		/*else if(afterburner && !canBurn
-			&& getGameTime() % 10 == 0){
-		}*/
+
+		
+		f32 afterburnSpeed = 10.0f;
 
 
 		CBlob@ carryBlob = blob.getCarriedBlob();
@@ -102,73 +112,113 @@ void onTick( CMovement@ this )
 			if (carryBlob.hasTag("medium weight"))
 			{
 				thrustAmount *= 0.5f;
+				afterburnSpeed *= 0.5f;
 			}
 			else if (carryBlob.hasTag("heavy weight"))
 			{
 				thrustAmount *= 0.3f;
+				afterburnSpeed *= 0.3f;
 			}
 		}
 
 
-		if(left){
-			f32 modifier = 1.5;
-			if(vel.x < -1 * thrustCutoff)
-				modifier = weakThrust;
-			else if( vel.x > 0)
-				modifier = powerThrust;
-
-			if(!blob.isFacingLeft()){
-				modifier * 0.8;
+		if(afterburning){
+			Vec2f burnVelocity = Vec2f(0, 0);
+			Vec2f oldVelocity = blob.getVelocity();
+			if(left){
+				burnVelocity.x -= afterburnSpeed;
+			}
+			else{
+				burnVelocity.x = oldVelocity.x;
 			}
 
+			if(right){
+				burnVelocity.x += afterburnSpeed;
+			}
+			else{
+				burnVelocity.x = oldVelocity.x;
+			}
 
+			if(up){
+				burnVelocity.y -= afterburnSpeed;
+			}
+			else{
+				burnVelocity.y = oldVelocity.y;
+			}
+
+			if(down){
+				burnVelocity.y += afterburnSpeed;
+			}
+			else{
+				burnVelocity.y = oldVelocity.y;
+			}
+
+			blob.setVelocity(burnVelocity);
+		}
+		else{
+			if(left){
+				f32 modifier = 1.5;
+				if(vel.x < -1 * thrustCutoff)
+					modifier = weakThrust;
+				else if( vel.x > 0)
+					modifier = powerThrust;
+
+				if(!blob.isFacingLeft() && !afterburning){
+					modifier * 0.8;
+				}
+
+
+					
+				blob.AddForce(Vec2f(modifier * thrustAmount * -1, 0));
+			}
+			if(right){
+				f32 modifier = 1.5;
+				if(vel.x > thrustCutoff)
+					modifier = weakThrust;
+				else if( vel.x < 0)
+					modifier = powerThrust;
 				
-			blob.AddForce(Vec2f(modifier * thrustAmount * -1, 0));
-		}
-		if(right){
-			f32 modifier = 1.5;
-			if(vel.x > thrustCutoff)
-				modifier = weakThrust;
-			else if( vel.x < 0)
-				modifier = powerThrust;
-			
-			if(blob.isFacingLeft()){
-				modifier * 0.8;
+				if(blob.isFacingLeft() && !afterburning){
+					modifier * 0.8;
+				}
+				
+				blob.AddForce(Vec2f(modifier * thrustAmount, 0));
+
 			}
-			
-			blob.AddForce(Vec2f(modifier * thrustAmount, 0));
+			if(up){
+				f32 modifier = 1.5;
+				if(vel.y < -1 * thrustCutoff)
+					modifier = weakThrust;
+				else if( vel.y > 0)
+					modifier = powerThrust;
 
-		}
-		if(up){
-			f32 modifier = 1.5;
-			if(vel.y < -1 * thrustCutoff)
-				modifier = weakThrust;
-			else if( vel.y > 0)
-				modifier = powerThrust;
+				blob.AddForce(Vec2f(0, modifier * thrustAmount * -1));
 
-			blob.AddForce(Vec2f(0, modifier * thrustAmount * -1));
+			}
+			if(down){
+				f32 modifier = 1.5;
+				if(vel.y > thrustCutoff)
+					modifier = weakThrust;
+				else if( vel.y < 0)
+					modifier = powerThrust;
 
-		}
-		if(down){
-			f32 modifier = 1.5;
-			if(vel.y > thrustCutoff)
-				modifier = weakThrust;
-			else if( vel.y < 0)
-				modifier = powerThrust;
-
-			blob.AddForce(Vec2f(0, modifier * thrustAmount * 1.30));
+				blob.AddForce(Vec2f(0, modifier * thrustAmount * 1.20));
+			}
 		}
 		
-		if(afterburner && canBurn){
-			fuel -= 0.90;
+		if(afterburning){
+			//fuel -= 0.90;
 			//blob.set_u32("lastBoostTime", getGameTime());
 		}
 		else if(left || right || up || down){
 
 			fuel -= 0.30;
 		}
-		
-		if(afterburner && getGameTime() % 10 == 0){
+
+		if(afterburning && getGameTime() % 5 == 0){
+			MakeDustParticle( blob.getPosition(), "Smoke.png");
+		}
+		else if(afterburner && getGameTime() % 10 == 0){
 			MakeDustParticle( blob.getPosition(), "Smoke.png");
 		}
 
@@ -221,3 +271,9 @@ void onTick( CMovement@ this )
 		
 	blob.set_f32("fuel", fuel);
 }
+
+
+/*Vec2f normalize(Vec2f direction){
+	f32 normalizer = Maths::Abs(direction.x) > Maths::Abs(direction.y) ? direction.x : direction.y;
+	return direction / Maths::Abs(normalizer);
+}*/

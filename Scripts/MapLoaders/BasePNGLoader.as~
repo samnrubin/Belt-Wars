@@ -904,7 +904,7 @@ class PNGLoader
 					tree.Init();
 					
 					if (map.getTile(offset).type == CMap::tile_empty)
-						map.SetTile(offset, CMap::tile_grass + map_random.NextRanged(3) );
+						map.SetTile(offset, CMap::tile_dirt );
 				}
 			}
 		}
@@ -952,11 +952,10 @@ class PNGLoader
 
 		map.AddBackground( "Sprites/Back/Stars.png", Vec2f(0.0f, 0.0f), Vec2f(0.2, 0.2), color_white ); 
 		map.AddBackground( "Sprites/Back/Stars2.png", Vec2f(0.0f, 0.0f), Vec2f(0.23, 0.23), color_white ); 
-		Random@ backrandom = Random();
 
-		u8 background = backrandom.NextRanged(6);
+		u8 background = XORRandom(6);
 
-		/*switch background{
+		switch (background){
 			case 0:
 				map.AddBackground( "Sprites/Back/Sun.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 
 				break;
@@ -976,7 +975,7 @@ class PNGLoader
 				map.AddBackground( "Sprites/Back/Jupiter.png", Vec2f(0.0f, 0.0f), Vec2f(0.27, 0.27), color_white ); 
 				map.AddBackground( "Sprites/Back/JupiterMoons2.png", Vec2f(0.0f, 0.0f), Vec2f(0.31, 0.31), color_white );
 				break;
-		}*/
+		}
 		
 
 		//map.AddBackground( "Sprites/Back/SunSmall.png", Vec2f(0.0f, 0.0f), Vec2f(0.265, 0.265), color_white ); 

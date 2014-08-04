@@ -44,12 +44,12 @@ void onInit( CBlob@ this )
 		ShopItem@ s = addShopItem( this, "Boat Shop", "$boatshop$", "boatshop", descriptions[58] );
 		AddRequirement( s.requirements, "blob", "mat_wood", "Aluminum", 100 );
 		AddRequirement( s.requirements, "blob", "mat_gold", "Gold", 50 );
-	}
+	}*/
 	{
 		ShopItem@ s = addShopItem( this, "Vehicle Shop", "$vehicleshop$", "vehicleshop", descriptions[57] );
 		AddRequirement( s.requirements, "blob", "mat_wood", "Aluminum", 100 );
-		AddRequirement( s.requirements, "blob", "mat_gold", "Gold", 50 );
-	}*/
+		AddRequirement( s.requirements, "blob", "mat_gold", "Uranium", 50 );
+	}
 	{
 		ShopItem@ s = addShopItem( this, "Storage Cache", "$storage$", "storage", descriptions[60] );
 		AddRequirement( s.requirements, "blob", "mat_stone", "Iron", 50);

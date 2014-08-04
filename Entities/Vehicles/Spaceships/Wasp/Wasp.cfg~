@@ -75,17 +75,17 @@ bool shape_collides                        = yes
 bool shape_ladder                          = no
 bool shape_platform                        = no
  #block_collider
-@f32 verticesXY                            =  0.0; 0.0; 
-			   								  42.0; 0.0; 
-			   								  42.0; 28.0;
-			   								  0.0; 28.0;
+@f32 verticesXY                            =  2.0; 4.0; 
+			   								  40.0; 16.0; 
+			   								  40.0; 27.0;
+			   								  2.0; 27.0;
 u8 block_support                           = 0
 bool block_background                      = no
 bool block_lightpasses                     = no
 bool block_snaptogrid                      = no
 
 $movement_factory                          = generic_movement
-@$movement_scripts						   = ShipThrusters.as;
+@$movement_scripts						   = ShipControls.as;
 $brain_factory                             =
 
 $attachment_factory                        = box2d_attachment	 
@@ -99,7 +99,7 @@ $inventory_factory                         =
 
 $name                                      = wasp
 @$scripts                              = 
-										 ShipControls.as;
+										 ShipRiding.as;
 										 Seats.as;
 										 Wooden.as;
 										# DecayOnLand.as;
@@ -113,7 +113,8 @@ $name                                      = wasp
 										 VehicleConvert.as;
 										# RunOverPeople.as;
 										 IsFlammable.as;
-f32 health                                 = 5.0
+										 HurtOnCollide.as;
+f32 health                                 = 6.0
 # looks & behaviour inside inventory
 $inventory_name                            = Wasp
 $inventory_icon                            = VehicleIcons.png

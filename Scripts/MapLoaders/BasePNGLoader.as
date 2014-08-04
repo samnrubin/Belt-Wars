@@ -904,7 +904,7 @@ class PNGLoader
 					tree.Init();
 					
 					if (map.getTile(offset).type == CMap::tile_empty)
-						map.SetTile(offset, CMap::tile_grass + map_random.NextRanged(3) );
+						map.SetTile(offset, CMap::tile_ground);
 				}
 			}
 		}
