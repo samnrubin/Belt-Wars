@@ -24,8 +24,8 @@ void onInit(CBlob@ this )
 	this.set_u32("thrustCutoffReg", 4);
 	this.getShape().SetRotationsAllowed(false);
 	this.Tag("facecursor");
-	this.set_Vec2f("fireoffset0", Vec2f(-5, -2));
-	this.set_Vec2f("fireoffset1", Vec2f(-5, 3));
+	this.set_Vec2f("fireoffset0", Vec2f(-4, -2));
+	this.set_Vec2f("fireoffset1", Vec2f(-4, 3));
 	this.set_string("lasertype", "laserwasp");
 	this.set_u16("firedelay", getTicksASecond() * .5);
 	this.set_u8("numguns", 2);

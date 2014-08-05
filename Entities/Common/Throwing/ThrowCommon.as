@@ -13,11 +13,11 @@ void client_SendThrowOrActivateCommand( CBlob@ this )
         params.write_Vec2f( this.getAimPos() - this.getPosition());
         params.write_Vec2f( this.getVelocity() );
         this.SendCommand( this.getCommandID("activate/throw"), params );
+		if(carried !is null && carried.getName() != "keg"){
+			newtonianKickback(this, carried);
+		}
     }
 
-	if(!(carried.getName() == "keg")){
-		newtonianKickback(this, carried);
-	}
 }
 
 void newtonianKickback(CBlob@ this, CBlob@ carried){

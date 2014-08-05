@@ -1,8 +1,8 @@
 #include "MakeDustParticle.as";
 #include "Explosion.as";
 
-const f32 thrust = 5;
-const int thrustCutoffReg = 4;
+const f32 thrust = 5.5;
+const int thrustCutoffReg = 5;
 const f32 weakThrust = 0.75;
 const f32 powerThrustReg = 4.0;
 
@@ -44,6 +44,31 @@ void onTick( CMovement@ this )
 
 	thrustedOut(blob);
 	f32 fuel = blob.get_f32("fuel");
+
+	f32 vely = Maths::Abs(blob.getVelocity().y);
+    f32 velx = Maths::Abs(blob.getVelocity().x);
+
+	f32 topvel = velx > vely ? velx : vely;
+
+	if(getNet().isClient() && getGameTime() % 3 == 0)
+	{
+		const string fallscreamtag = "_fallingscream";
+		if(topvel > 0.2f)
+		{
+			if(topvel > 22)
+			{
+				if(!blob.hasTag(fallscreamtag))
+				{
+					blob.Tag(fallscreamtag);
+					blob.getSprite().PlaySound("man_scream.ogg");
+				}
+			}
+		}
+		else
+		{
+			blob.Untag(fallscreamtag);
+		}
+	}
 
 	if(!blob.hasTag("nofuel")){
 
@@ -94,16 +119,6 @@ void onTick( CMovement@ this )
 		
 		bool afterburning = afterburner && canAfterburn(blob);
 
-		if(afterburning){
-			/*thrustAmount *= 2;
-			thrustCutoff *= 8;
-			powerThrust *= 12;
-			if(!(left || right || up || down)){
-				Vec2f vel = blob.getVelocity();
-				vel.Normalize();
-				blob.AddForce(vel * 16.0);
-			}*/
-		}
 
 		f32 afterburnSpeed = afterburnSpeedReg;	
 
@@ -225,7 +240,7 @@ void onTick( CMovement@ this )
 		}
 		
 		if(afterburning){
-			fuel -= 1.35;
+			fuel -= 1.65;
 			//blob.set_u32("lastBoostTime", getGameTime());
 		}
 		else if(left || right || up || down){
@@ -286,7 +301,7 @@ void onTick( CMovement@ this )
 	}
 
 	if(blob.isMyPlayer() && getGameTime() % 30 == 0 && !blob.hasTag("nofuel") &&
-	  fuel <= 12.5){
+	  (fuel <= 12.5 || (fuel <= 30.0 && blob.get_bool("afterburner")))){
 		Sound::Play("depleting.ogg");
 	  }
 		

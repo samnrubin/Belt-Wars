@@ -12,8 +12,8 @@ const s32 cost_ballista = 150;
 const s32 cost_ballista_ammo = 30;
 const s32 cost_ballista_ammo_upgrade_gold = 60;
 const s32 cost_balloon = 100;
-const s32 cost_wasp = 100;
-const s32 cost_wasp_uranium = 50;
+const s32 cost_wasp = 150;
+const s32 cost_wasp_uranium = 75;
 
 void onInit( CBlob@ this )
 {	 

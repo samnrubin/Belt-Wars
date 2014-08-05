@@ -18,7 +18,7 @@ const string[] descriptions = {
     /* 14  */               "Excalibur is the legendary sword of King Arthur, attributed with magical powers to conquer all enemies.",  // excalibur
     /* 15  */               "Piercing bolts for ballista.", // mat_bolts
     /* 16  */               "A simple aluminum ladder for climbing over defenses.", // ladder
-    /* 17  */               "An iron boulder useful for crushing enemies.", // boulder
+    /* 17  */               "A iron boulder useful for crushing enemies.", // boulder
     /* 18  */               "An empty aluminum crate for storing and transporting inventory.", // crate
     /* 19  */               "An explosive powder keg.", // keg
     /* 20  */               "A land or water mine. Explodes on contact with enemy.", // mine
@@ -30,7 +30,7 @@ const string[] descriptions = {
     /* 26  */               "A decorative flower seedling.", // flower
     /* 27  */               "Grain used as food.", // grain
     /* 28  */               "Aluminum swing door.", // aluminum_door
-    /* 29  */               "Steel spikes used as a defense around fortifications.", // spikes
+    /* 29  */               "Iron spikes used as a defense around fortifications.", // spikes
     /* 30  */               "A trampoline used for bouncing and jumping over enemy walls.", // trampoline
     /* 31  */               "A stationary arrow-firing death machine.", // mounted_bow
     /* 32  */               "Plasma arrows used to set aluminum structures on plasma.", // plasma arrows

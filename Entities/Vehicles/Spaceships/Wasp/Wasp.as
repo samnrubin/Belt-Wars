@@ -20,7 +20,7 @@ void onInit(CBlob@ this )
 	this.getShape().getConsts().transports = true;
 	this.Tag("heavy weight");*/
 
-	this.set_f32("thrustAmount", 70);
+	this.set_f32("thrustAmount", 35);
 	this.set_u32("thrustCutoffReg", 4);
 	this.getShape().SetRotationsAllowed(false);
 	this.Tag("facecursor");

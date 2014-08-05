@@ -10,7 +10,7 @@ string[] chats = {"Coming soon: AI Controlled Space Stations",
 				 "Coming soon: New Sprites",
 				 "Coming soon: Lazer Guns Pew Pew",
 				 "Coming soon: More Pilotable Space Ships",
-				 "Coming soon: More Backgrounds",
+				 //"Coming soon: More Backgrounds",
 				 "Coming soon: New Futuristic Theme",
 				 "Coming soon: More Gravity Generators",
 				 "The Saw generates a vertical gravity field for pulling in logs or enemies!",
@@ -35,14 +35,16 @@ string[] chats = {"Coming soon: AI Controlled Space Stations",
 
 int lastPick = 0;
 
-string tutorialMain = "Welcome to Belt Wars v.(0.6)\n\n" +
+string tutorialMain = "Welcome to Belt Wars v.(0.61)\n\n" +
 					  "Enter/exit spaceships with \'E\'\n\n" +
 					  "Activate your afterburner with your \"taunts\" key\n" +
 					  "Default is 'V', but it can be changed in settings\n\n" +
 					  "Press L to view the change log\n\n\n" +
 					  "PRESS P TO DISMISS/BRING BACK THIS DIALOG";
 
-string changelog = "V. 0.6\n\n" +
+string changelog = "V. 061\n" +
+				   "Misc. Wasp fixes and changes\nFall damage reduced\nBugfix: RED CIRCLE THROWING BUG FIXED HURRAY"
+				   "\nV. 0.6\n" +
 				   "Wasp spacecraft added\n" +
 				   "Afterburners reworked, should be much more fun\n" +
 				   "Uranium resource added w/ custom mining sound\n" +
@@ -50,7 +52,7 @@ string changelog = "V. 0.6\n\n" +
 				   "Motherload and Defensive Line maps added\n"
 				   "Removed support restrictions for blocks and doors,\n" +
 				   "building large structures should be much easier now\n" +
-				   "V. 0.55\n" +
+				   "\nV. 0.55\n" +
 				   "Bugfix: Glitching out of map\n" +
 				   "Bugfix: Gravity added to drill/trampoline\n" +
 				   "Added randomly picked backgrounds\n\n\n" +
@@ -82,7 +84,7 @@ void onTick(CRules@ this){
 
 	if(lastMessageTime == 0){
 		lastMessageTime = getGameTime();
-		client_AddToChat("Welcome to Belt Wars! v.(0.6)", M_COLOR);
+		client_AddToChat("Welcome to Belt Wars! v.(0.61)", M_COLOR);
 		client_AddToChat("Design and coding by Nand, spriting by Nand/Cubone", M_COLOR);
 	}
 
