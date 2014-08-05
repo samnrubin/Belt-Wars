@@ -40,13 +40,18 @@ void onInit( CBlob@ this )
 
 	// 20 seconds of floating around - gets cut down for fire arrow
 	// in ArrowHitMap
-	this.server_SetTimeToDie( 20 );
+	this.server_SetTimeToDie( 1.5 );
 
 	const u8 arrowType = this.get_u8("laser type");
 
 	this.SetLight(true);
 	this.SetLightRadius(24.0f);
 	this.SetLightColor(getTeamColor(this.getTeamNum()));
+
+	if(this.getName() == "laserwasp"){
+		this.getSprite().PlaySound("WaspLaser.ogg");
+	}
+	
 	/*if (arrowType == ArrowType::bomb)			 // bomb arrow
 	{
 		SetupBomb( this, bomb_fuse, 48.0f, 1.5f, 24.0f, 0.5f, true );
@@ -181,9 +186,9 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
 		if (dmg > 0.0f) {
 			this.server_Hit( blob, point1, initVelocity, dmg, Hitters::muscles);
 		}
+		this.server_Die();
 
 		//if (dmg > 0.0f) { // dont stick bomb arrows
-		this.Tag("collided");
 		//}
 	}
 }

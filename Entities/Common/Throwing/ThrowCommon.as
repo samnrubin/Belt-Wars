@@ -1,7 +1,7 @@
 //throwing common functionality.
 
 
-const f32 DEFAULT_THROW_VEL = 6.0f;
+const f32 DEFAULT_THROW_VEL_WTF = 6.0f;
 
 void client_SendThrowOrActivateCommand( CBlob@ this )
 {
@@ -63,7 +63,7 @@ Vec2f getThrowVelocity( CBlob@ this, Vec2f vector, Vec2f selfVelocity, f32 this_
 {
     Vec2f vel = vector;
     f32 len = vel.Normalize();
-    vel *= DEFAULT_THROW_VEL;
+    vel *= DEFAULT_THROW_VEL_WTF;
     vel *= this.get_f32( "throw scale" );
     vel += selfVelocity*this_vel_affect; // blob velocity
 

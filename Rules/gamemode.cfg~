@@ -4,8 +4,8 @@
     
     teams                              = team1.cfg; team2.cfg;
     
-    gamemode_name                      = Belt Wars
-    gamemode_info                      = Belt Wars
+    gamemode_name                      = Belter Wars
+    gamemode_info                      = Belter Wars
     
     scripts                            = KAG.as;
                                          Space.as;

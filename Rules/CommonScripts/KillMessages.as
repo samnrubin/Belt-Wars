@@ -69,7 +69,7 @@ class KillFeed
             KillMessage@ message = killMessages[message_step];
             Vec2f dim, ul, lr;
 
-			print(message.attacker + "-" + formatInt(message.hitter, ""));
+			//print(message.attacker + "-" + formatInt(message.hitter, ""));
 
             if (message.attackerteam != -1)
             {

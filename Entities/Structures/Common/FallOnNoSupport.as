@@ -34,7 +34,7 @@ void onTick(CBlob@ this)
 
 void onCommand( CBlob@ this, u8 cmd, CBitStream @params )
 {
-	if (cmd == this.getCommandID("static off"))
+	if (cmd == this.getCommandID("static off") && this.hasTag("gravityVertical"))
 	{
 		CShape@ shape = this.getShape();
 		shape.SetStatic( false );

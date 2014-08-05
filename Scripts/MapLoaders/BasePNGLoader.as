@@ -903,8 +903,8 @@ class PNGLoader
 					tree.setPosition( getSpawnPosition( map, offset ) );
 					tree.Init();
 					
-					if (map.getTile(offset).type == CMap::tile_empty)
-						map.SetTile(offset, CMap::tile_ground);
+					/*if (map.getTile(offset).type == CMap::tile_empty)
+						map.SetTile(offset, CMap::tile_ground);*/
 				}
 			}
 		}

@@ -170,8 +170,9 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
 			return;
 		
 		string laserType = this.getName();
+		f32 damage = 0;
 		if(laserType == "laserwasp"){
-			f32 damage = 0.5f;
+			damage = 0.5f;
 		}
 		
 		f32 dmg = blob.getTeamNum() == this.getTeamNum() ? 0.0f : damage;
@@ -180,9 +181,9 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
 		if (dmg > 0.0f) {
 			this.server_Hit( blob, point1, initVelocity, dmg, Hitters::muscles);
 		}
+		this.server_Die();
 
 		//if (dmg > 0.0f) { // dont stick bomb arrows
-		this.Tag("collided");
 		//}
 	}
 }

@@ -15,7 +15,7 @@ void onInit(CBlob@ this)
 	this.getShape().getVars().waterDragScale = 1.0f; //water drag == regular drag
 
 	if (!this.exists("swimspeed"))
-		this.set_f32("swimspeed", 1.0f);
+		this.set_f32("swimspeed", 2.5f);
 	if (!this.exists("swimforce"))
 		this.set_f32("swimforce", 0.7f);
 

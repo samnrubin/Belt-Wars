@@ -70,9 +70,6 @@ void onTick(CMovement@ this){
 
 	if(fire){
 		string laserType = blob.get_string("lasertype");
-		if(laserType == "laserwasp"){
-			blob.getSprite().PlaySound("WaspLaser.ogg");
-		}
 		if (getNet().isServer()){
 
 			if(!blob.exists("lastfired") || getGameTime() - blob.get_u32("lastfired") >= blob.get_u16("firedelay")){

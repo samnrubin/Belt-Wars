@@ -4,6 +4,7 @@ void onInit(CBlob@ this){
 	this.addCommandID("leave");
 	this.addCommandID("enter");
 	this.Tag("spaceship");
+
 }
 
 

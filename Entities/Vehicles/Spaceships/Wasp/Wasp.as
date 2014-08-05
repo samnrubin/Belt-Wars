@@ -29,6 +29,8 @@ void onInit(CBlob@ this )
 	this.set_string("lasertype", "laserwasp");
 	this.set_u16("firedelay", getTicksASecond() * .5);
 	this.set_u8("numguns", 2);
+
+	this.Tag("convert on sit");
 }
 
 
@@ -67,5 +69,19 @@ void onDetach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint )
 }
 
 void onDie( CBlob@ this){
+	this.SetDamageOwnerPlayer(this.getPlayerOfRecentDamage());
+
+	AttachmentPoint@[] aps;
+	
+	if (this.getAttachmentPoints( @aps )){
+		for (uint i = 0; i < aps.length; i++){
+				AttachmentPoint@ ap = aps[i];
+				CBlob@ blob = ap.getOccupied();
+				if (ap.socket && blob !is null){
+					this.server_Hit(blob, this.getPosition(), Vec2f_zero, 4.0f, Hitters::explosion, true);
+
+				}
+		}
+	}
 	Explode(this, 40.0f, 4.0f);
 }

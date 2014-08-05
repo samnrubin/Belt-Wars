@@ -1,4 +1,5 @@
 #include "MakeDustParticle.as";
+#include "Explosion.as";
 
 const f32 thrust = 5;
 const int thrustCutoffReg = 4;
@@ -7,6 +8,7 @@ const f32 powerThrustReg = 4.0;
 
 const u32 recoverTime = getTicksASecond() * 6;
 const u32 afterburnerKickinTime = getTicksASecond();
+const f32 afterburnSpeedReg = 9.0f;
 
 void onInit( CMovement@ this )
 {
@@ -21,6 +23,7 @@ void onInit( CMovement@ this )
 	blob.set_u32("lastBoostTime", getGameTime() - getTicksASecond() * 10);
 	blob.set_bool("afterburner", false);
 	
+	blob.set_u32("afterburntime", getGameTime() - 2 * afterburnerKickinTime);
 }
 
 void thrustedOut(CBlob@ this){
@@ -102,8 +105,7 @@ void onTick( CMovement@ this )
 			}*/
 		}
 
-		
-		f32 afterburnSpeed = 10.0f;
+		f32 afterburnSpeed = afterburnSpeedReg;	
 
 
 		CBlob@ carryBlob = blob.getCarriedBlob();
@@ -123,37 +125,53 @@ void onTick( CMovement@ this )
 
 
 		if(afterburning){
-			Vec2f burnVelocity = Vec2f(0, 0);
 			Vec2f oldVelocity = blob.getVelocity();
-			if(left){
+			Vec2f burnVelocity = oldVelocity;
+			bool noX = false;
+			bool noY = false;
+
+
+
+			if(left && oldVelocity.x > -1 * (afterburnSpeed -0.1)){
 				burnVelocity.x = afterburnSpeed * -1;
 			}
-			else{
-				burnVelocity.x = oldVelocity.x;
-			}
 
-			if(right){
+			if(right && oldVelocity.x < (afterburnSpeed + 0.1)){
 				burnVelocity.x = afterburnSpeed;
 			}
-			else{
-				burnVelocity.x = oldVelocity.x;
+
+			if((left && right) || !(left || right)){
+				//burnVelocity.x = oldVelocity.x;
+				//print("nox");
+				noX = true;
 			}
 
-			if(up){
+			if(up && oldVelocity.y > -1 * (afterburnSpeed -0.1)){
 				burnVelocity.y = afterburnSpeed * -1;
 			}
-			else{
-				burnVelocity.y = oldVelocity.y;
-			}
 
-			if(down){
+			if(down && oldVelocity.y < (afterburnSpeed + 0.1)){
 				burnVelocity.y = afterburnSpeed * 1;
 			}
-			else{
-				burnVelocity.y = oldVelocity.y;
+
+			if((up && down) || !(up || down)){
+				//burnVelocity.y = oldVelocity.y;
+				noY = true;
+			}
+
+			if(!noX && noY){
+				burnVelocity.y = 0;
+			}
+			else if(!noY && noX){
+				burnVelocity.x = 0;
+			}
+			else if(noX && noY){
+				burnVelocity = oldVelocity;
 			}
 
 			blob.setVelocity(burnVelocity);
+			burnVelocity.Normalize();
+			blob.AddForce(vel * 1);
 		}
 		else{
 			if(left){
@@ -207,12 +225,12 @@ void onTick( CMovement@ this )
 		}
 		
 		if(afterburning){
-			//fuel -= 0.90;
+			fuel -= 1.25;
 			//blob.set_u32("lastBoostTime", getGameTime());
 		}
 		else if(left || right || up || down){
 
-			fuel -= 0.30;
+			fuel -= 0.40;
 		}
 
 		if(afterburning && getGameTime() % 5 == 0){
@@ -233,9 +251,13 @@ void onTick( CMovement@ this )
 	u32 timeSinceBoost = getGameTime() - blob.get_u32("lastBoostTime");
 	
 	if(timeSinceBoost > recoverTime / 2){
+		if(blob.get_bool("afterburner") == true && blob.hasTag("nofuel")){
+			blob.set_bool("afterburner", false);
+			Explode(blob, 16.0f, 1.0f);
+		}
 
 		if(fuel < 100.0){
-			fuel += 0.25;
+			fuel += 0.35;
 		}
 		else if(fuel > 100.0){
 			fuel = 100.0;
@@ -253,11 +275,10 @@ void onTick( CMovement@ this )
 		blob.getSprite().PlaySound("PowerDown.ogg", 2.0);
 		blob.set_u32("lastBoostTime", getGameTime());
 		blob.Tag("nofuel");
-		blob.set_bool("afterburner", false);
 	}
 	
 	if(blob.hasTag("nofuel") && getGameTime() % 10 == 0){ 
-		MakeDustParticle( blob.getPosition(), "Smoke.png");
+		MakeDustParticle( blob.getPosition(), "LargeSmoke.png");
 		if(blob.isMyPlayer() && getGameTime() % 40 == 0){
 			Sound::Play("depleted.ogg");
 

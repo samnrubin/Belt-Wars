@@ -4,6 +4,7 @@ void onInit(CBlob@ this){
 	this.addCommandID("leave");
 	this.addCommandID("enter");
 	this.Tag("spaceship");
+	this.Tag("convert on sit");
 }
 
 
@@ -90,4 +91,10 @@ void onDetach( CBlob@ this, CBlob@ detached, AttachmentPoint@ attachedPoint )
 	{
 		detached.setVelocity( this.getVelocity() );
 	}
+
+	this.setKeyPressed( key_left, false );
+	this.setKeyPressed( key_right, false );
+	this.setKeyPressed( key_up, false );
+	this.setKeyPressed( key_down, false );
+	this.setKeyPressed( key_action1, false );
 }

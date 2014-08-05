@@ -15,6 +15,8 @@
 
 #include "ThrowCommon.as";
 
+const f32 DEFAULT_THROW_VEL = 6.0f;
+
 
 void onInit( CBlob@ this )
 {
@@ -131,7 +133,7 @@ void DoThrow( CBlob@ this, CBlob@ carried, Vec2f pos, Vec2f vector, Vec2f selfVe
         ourvelscale = this.get_f32( "throw ourvel scale");
     }
 
-    Vec2f vel = getThrowVelocity( this, vector, selfVelocity, ourvelscale );
+    Vec2f vel = getThrowVelocityWTF( this, vector, selfVelocity, ourvelscale );
 
     if (carried !is null)
     {
@@ -156,6 +158,22 @@ void DoThrow( CBlob@ this, CBlob@ carried, Vec2f pos, Vec2f vector, Vec2f selfVe
 			}
         }
     }
+}
+
+Vec2f getThrowVelocityWTF( CBlob@ this, Vec2f vector, Vec2f selfVelocity, f32 this_vel_affect = 1.0f )
+{
+    Vec2f vel = vector;
+    f32 len = vel.Normalize();
+    vel *= DEFAULT_THROW_VEL;
+    vel *= this.get_f32( "throw scale" );
+    vel += selfVelocity*this_vel_affect; // blob velocity
+
+	f32 closeDist = this.getRadius() + 64.0f;
+	if (selfVelocity.getLengthSquared() < 0.1f && len < closeDist)
+	{
+		vel *= len / closeDist;
+	}
+    return vel;
 }
 
 
