@@ -12,7 +12,7 @@ const s32 cost_ballista = 150;
 const s32 cost_ballista_ammo = 30;
 const s32 cost_ballista_ammo_upgrade_gold = 60;
 const s32 cost_balloon = 100;
-const s32 cost_wasp = 150;
+const s32 cost_wasp = 100;
 const s32 cost_wasp_uranium = 50;
 
 void onInit( CBlob@ this )
@@ -25,6 +25,7 @@ void onInit( CBlob@ this )
 	this.getShape().getConsts().mapCollisions = false;
 
 	AddIconToken( "$vehicleshop_upgradebolts$", "BallistaBolt.png", Vec2f(32,8), 1 );
+	AddIconToken( "$wasp$", "VehicleIcons.png", Vec2f(32,32), 6 );
 	
 	// SHOP
 	this.set_Vec2f("shop offset", Vec2f(0, 0));
@@ -33,7 +34,7 @@ void onInit( CBlob@ this )
 	this.set_u8("shop icon", 25);
 
 	{
-		ShopItem@ s = addShopItem( this, "Wasp", "$ballista$", "wasp", "A small spacecraft", false, true );
+		ShopItem@ s = addShopItem( this, "Wasp", "$wasp$", "wasp", "A small spacecraft", false, true );
 		s.crate_icon = 4;
 		AddRequirement( s.requirements, "coin", "", "Coins", cost_wasp );
 		AddRequirement( s.requirements, "blob", "mat_gold", "Uranium", cost_wasp_uranium );

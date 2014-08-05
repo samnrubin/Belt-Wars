@@ -292,7 +292,7 @@ void onTick( CSprite@ this )
 				}
 			}
 
-			/*AttachmentPoint@ vehicle = blob.getAttachments().getAttachmentPointByName("DRIVER");	 
+			AttachmentPoint@ vehicle = blob.getAttachments().getAttachmentPointByName("DRIVER");	 
 			if (vehicle !is null && vehicle.getOccupied() !is null)
 			{
 				if (shouldDraw( blob, vehicle.getOccupied(), "help DRIVER movement" )) {
@@ -301,7 +301,7 @@ void onTick( CSprite@ this )
 				if (shouldDraw( blob, vehicle.getOccupied(), "help hop out" )) {
 					renderHelps.push_back( getHelpText( vehicle.getOccupied(), "help hop out") );
 				}
-			}*/
+			}
 
 		}
 		else

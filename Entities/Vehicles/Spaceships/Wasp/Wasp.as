@@ -24,8 +24,8 @@ void onInit(CBlob@ this )
 	this.set_u32("thrustCutoffReg", 4);
 	this.getShape().SetRotationsAllowed(false);
 	this.Tag("facecursor");
-	this.set_Vec2f("fireoffset0", Vec2f(-6, -2));
-	this.set_Vec2f("fireoffset1", Vec2f(-6, 3));
+	this.set_Vec2f("fireoffset0", Vec2f(-4, -2));
+	this.set_Vec2f("fireoffset1", Vec2f(-4, 3));
 	this.set_string("lasertype", "laserwasp");
 	this.set_u16("firedelay", getTicksASecond() * .5);
 	this.set_u8("numguns", 2);
@@ -60,12 +60,6 @@ void onAttach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint )
 	Vehicle_onAttach( this, v, attached, attachedPoint );*/
 	this.SetDamageOwnerPlayer( attached.getPlayer() );
 	attached.DropCarried();
-	attached.Tag("invincible");
-}
-
-void onDetach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint )
-{
-	attached.Untag("invincible");
 }
 
 void onDie( CBlob@ this){
@@ -78,6 +72,7 @@ void onDie( CBlob@ this){
 				AttachmentPoint@ ap = aps[i];
 				CBlob@ blob = ap.getOccupied();
 				if (ap.socket && blob !is null){
+					blob.Untag("inship");
 					this.server_Hit(blob, this.getPosition(), Vec2f_zero, 4.0f, Hitters::explosion, true);
 
 				}

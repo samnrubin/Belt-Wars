@@ -945,7 +945,7 @@ class PNGLoader
 	{
 		// sky
 
-		map.CreateSky( color_black, Vec2f(1.0f,1.0f), 200, "Sprites/Back/cloud", 0);
+		map.CreateSky( color_black);
 		//map.CreateSkyGradient( "Sprites/skygradient.png" ); // override sky color with gradient
 
 		// plains

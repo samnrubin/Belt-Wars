@@ -225,7 +225,7 @@ void onTick( CMovement@ this )
 		}
 		
 		if(afterburning){
-			fuel -= 1.2;
+			fuel -= 1.35;
 			//blob.set_u32("lastBoostTime", getGameTime());
 		}
 		else if(left || right || up || down){
@@ -251,11 +251,6 @@ void onTick( CMovement@ this )
 	u32 timeSinceBoost = getGameTime() - blob.get_u32("lastBoostTime");
 	
 	if(timeSinceBoost > recoverTime / 2){
-		if(blob.get_bool("afterburner") == true && blob.hasTag("nofuel")){
-			blob.set_bool("afterburner", false);
-			Explode(blob, 16.0f, 0.5f);
-		}
-
 		if(fuel < 100.0){
 			fuel += 0.35;
 		}
@@ -275,6 +270,11 @@ void onTick( CMovement@ this )
 		blob.getSprite().PlaySound("PowerDown.ogg", 2.0);
 		blob.set_u32("lastBoostTime", getGameTime());
 		blob.Tag("nofuel");
+		if(blob.get_bool("afterburner") == true){
+			Explode(blob, 16.0f, 0.5f);
+			blob.server_Hit(blob, blob.getPosition(), Vec2f_zero, 0.5f, Hitters::explosion, true);
+			blob.set_bool("afterburner", false);
+		}
 	}
 	
 	if(blob.hasTag("nofuel") && getGameTime() % 10 == 0){ 

@@ -11,6 +11,7 @@ $sprite_factory                                   = generic_sprite
 													RunnerHead.as;
 													DefaultActorHUD.as;
 													ArcherHUD.as;
+													FuelHUD.as;
 													RunnerFootSteps.as;
 													DazzleAnimation.as;
 													RunnerDrowning.as;
@@ -189,6 +190,7 @@ $name                                             = archer
 													UnSpawnImmunity.as;
 													TauntAI.as;
 													EmoteBubble.as;
+													ShipEffects.as;
 													RunnerDrowning.as; # after redflash so it overrides the flash
 													FleshHit.as; # this gibs so leave it last
 													RunnerDeath.as; # this checks for "dead" so leave it last

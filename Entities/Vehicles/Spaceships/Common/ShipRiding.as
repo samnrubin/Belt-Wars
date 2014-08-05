@@ -97,4 +97,11 @@ void onDetach( CBlob@ this, CBlob@ detached, AttachmentPoint@ attachedPoint )
 	this.setKeyPressed( key_up, false );
 	this.setKeyPressed( key_down, false );
 	this.setKeyPressed( key_action1, false );
+
+	detached.Untag("inship");
+}
+
+void onAttach( CBlob@ this, CBlob@ attached, AttachmentPoint @attachedPoint ){
+	attached.Tag("invincible");
+	attached.Tag("inship");
 }
