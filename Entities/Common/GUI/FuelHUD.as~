@@ -2,6 +2,9 @@ const string fuelFilename = "Entities/Common/GUI/Fuel.png";
 
 #include "Thrusters.as";
 
+const string overheating = "Overheating!!!";
+
+
 void onInit( CSprite@ this )
 {
 	this.getCurrentScript().runFlags |= Script::tick_myplayer;
@@ -22,7 +25,6 @@ void onRender( CSprite@ this )
 	
 	f32 perc = blob.get_f32("fuel");
 	//print(formatFloat(perc, ""));
-	perc = -1;
 
 	GUI::DrawIcon(fuelFilename, 0, Vec2f(32, 330), ul, factor);
 	if(perc >= 0.0f){
@@ -30,7 +32,7 @@ void onRender( CSprite@ this )
 			GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, (628 - 6* perc) * factor), factor);
 	}
 
-	GUI::DrawIcon(fuelFilename, 1, Vec2f(32, 330 * factor), ul, factor);
+	GUI::DrawIcon(fuelFilename, 1, Vec2f(32, 330), ul, factor);
 
 	//Bottom
 	GUI::DrawIcon(fuelFilename, 2, Vec2f(32, 14), ul + Vec2f(0, 628 * factor), factor);
@@ -59,8 +61,17 @@ void onRender( CSprite@ this )
 
 	}
 
+	if(blob.hasTag("overheating")){
+		SColor textcolor;
 
+		if(getGameTime() % 15 < 7)
+			textcolor = color_white;
+		else
+			textcolor = SColor(0xff690000);
+	
+		Vec2f size;
+		GUI::GetTextDimensions(overheating, size);
 
+		GUI::DrawText("Overheating!!!",Vec2f((getScreenWidth() - size.x) / 2, (getScreenHeight() - size.y) / 2 - 50), textcolor);
+	}
 }
-
-

@@ -35,15 +35,25 @@ string[] chats = {"Coming soon: AI Controlled Space Stations",
 
 int lastPick = 0;
 
-string tutorialMain = "Welcome to Belt Wars v.(0.61)\n\n" +
+string tutorialMain = "Welcome to Belt Wars v.(0.65)\n\n" +
+					  "ATTENTION: RP is allowed but this is not an RP server\n" +
+					  "Attemping to kick someone for not respecting \"peace\"\n"
+					  "will earn YOU a ban, not them\n\n"
 					  "Enter/exit spaceships with \'E\'\n\n" +
 					  "Activate your afterburner with your \"taunts\" key\n" +
 					  "Default is 'V', but it can be changed in settings\n\n" +
 					  "Press L to view the change log\n\n\n" +
 					  "PRESS P TO DISMISS/BRING BACK THIS DIALOG";
 
-string changelog = "V. 061\n" +
-				   "Misc. Wasp fixes and changes\nFall damage reduced\nBugfix: RED CIRCLE THROWING BUG FIXED HURRAY"
+string changelog = "V. 0.65\n" +
+				   "Afterburners totally reworked, now mouse controlled\n" +
+				   "Wasp rebalances:Increased health, damage, explosion\n" +
+				   "tile damage\n" +
+				   "Ship building seperated into Uranium Refinery and\n" +
+				   "Fleet Beacon. Refinery is cheaper but requires uranium\n" +
+				   "Misc. Resprites and bugfixes.\n"
+				   "\nV. 0.61\n" +
+				   "Misc. Wasp fixes and changes\nFall damage reduced\nBugfix: RED CIRCLE THROWING BUG FIXED HURRAY\n"
 				   "\nV. 0.6\n" +
 				   "Wasp spacecraft added\n" +
 				   "Afterburners reworked, should be much more fun\n" +

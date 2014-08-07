@@ -40,16 +40,16 @@ void onInit( CBlob@ this )
 		ShopItem@ s = addShopItem( this, "Archer Shop", "$archershop$", "archershop", descriptions[56] );
 		AddRequirement( s.requirements, "blob", "mat_wood", "Aluminum", COST_WOOD_FACTORY );
 	}
-	{
-		ShopItem@ s = addShopItem( this, "Uranium Refinery", "$boatshop$", "boatshop", "Produces spacecraft at half cost. Will be DESTROYED after producing 10 ships" );
-		AddRequirement( s.requirements, "blob", "mat_wood", "Aluminum", 100 );
-		AddRequirement( s.requirements, "blob", "mat_stone", "Iron", 100 );
+	/*{
+		ShopItem@ s = addShopItem( this, "Uranium Refinery", "$boatshop$", "boatshop", "Produces spaceships at half cost. Will be DESTROYED after producing 10 ships" );
+		AddRequirement( s.requirements, "blob", "mat_wood", "Uranium", 100 );
+		AddRequirement( s.requirements, "blob", "mat_stone", "Uranium", 100 );
 		AddRequirement( s.requirements, "blob", "mat_gold", "Uranium", 400 );
-	}
+	}*/
 	{
-		ShopItem@ s = addShopItem( this, "Fleet Beacon", "$vehicleshop$", "vehicleshop", "Summon spacecraft from the home fleet at a higher cost than the Uranium Refinery" );
+		ShopItem@ s = addShopItem( this, "Vehicle Shop", "$vehicleshop$", "vehicleshop", descriptions[57] );
 		AddRequirement( s.requirements, "blob", "mat_wood", "Aluminum", 100 );
-		AddRequirement( s.requirements, "blob", "mat_wood", "Iron", 100 );
+		AddRequirement( s.requirements, "blob", "mat_gold", "Uranium", 50 );
 	}
 	{
 		ShopItem@ s = addShopItem( this, "Storage Cache", "$storage$", "storage", descriptions[60] );

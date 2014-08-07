@@ -9,19 +9,19 @@ void addCommonBuilderBlocks( BuildBlock[]@ blocks )
 {
 	{   // stone_block
 		BuildBlock b( CMap::tile_castle, "stone_block", "$stone_block$",
-						"Iron Block\nBasic building block" );
+						"Steel Block\nBasic building block" );
 		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 10 );
 		blocks.push_back( b );
 	}
 	{   // back_stone_block
 		BuildBlock b( CMap::tile_castle_back, "back_stone_block", "$back_stone_block$",
-						"Back Iron Wall\nExtra support" );
+						"Back Steel Wall\nExtra support" );
 		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 2 );
 		blocks.push_back( b );
 	}
 	{   // stone_door
 		BuildBlock b( 0, "stone_door", "$stone_door$",
-						"Iron Door\nPlace next to walls" );
+						"Steel Door\nPlace next to walls" );
 		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 50 );
 		blocks.push_back( b );
 	}    
@@ -66,7 +66,7 @@ void addCommonBuilderBlocks( BuildBlock[]@ blocks )
 	
 	{   // spikes
 		BuildBlock b( 0, "spikes", "$spikes$",
-						"Spikes\nPlace on Iron Block\nfor Retracting Trap" );
+						"Spikes\nPlace on Steel Block\nfor Retracting Trap" );
 		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 30 );
 		blocks.push_back( b );
 	}

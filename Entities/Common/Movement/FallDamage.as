@@ -23,6 +23,8 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
 
     if( !((velx >= 10 && cvelx < 6 )|| (vely >= 10 && cvely < 6))) { return; }
 
+	if(this.exists("afterburner") && this.get_bool("afterburner") && getGameTime() - this.get_u32("switchTime") < getTicksASecond() ){ return; }
+
 	f32 topvel = velx > vely ? velx : vely;
 
     f32 damage = FallDamageAmount(topvel);

@@ -2,6 +2,9 @@ const string fuelFilename = "Entities/Common/GUI/Fuel.png";
 
 #include "Thrusters.as";
 
+const string overheating = "Overheating!!!";
+
+
 void onInit( CSprite@ this )
 {
 	this.getCurrentScript().runFlags |= Script::tick_myplayer;
@@ -58,8 +61,17 @@ void onRender( CSprite@ this )
 
 	}
 
+	if(blob.hasTag("overheating")){
+		SColor textcolor;
 
+		if(getGameTime() % 15 < 7)
+			textcolor = color_white;
+		else
+			textcolor = SColor(0xff690000);
+	
+		Vec2f size;
+		GUI::GetTextDimensions(overheating, size);
 
+		GUI::DrawText(overheating,Vec2f((getScreenWidth() - size.x) / 2, (getScreenHeight() - size.y) / 2 - 50), textcolor);
+	}
 }
-
-

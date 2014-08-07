@@ -31,6 +31,7 @@ void onInit(CBlob@ this )
 	this.set_u8("numguns", 2);
 
 	this.Tag("convert on sit");
+	this.set_f32("map_damage_radius", 56.0);
 }
 
 

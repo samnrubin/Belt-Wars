@@ -98,7 +98,7 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
                 f32 dmg = vellen * coef * (mass / mass2) / 8.0f;
 
 				if(this.getName() == "wasp" && (blob.getName() == "stone_door" || blob.getName() == "wooden_door")){
-					dmg *= 0.25;
+					dmg *= 0.5;
 				}
 
                 if (dmg > 0.29f)

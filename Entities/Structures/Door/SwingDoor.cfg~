@@ -103,7 +103,7 @@ $name                                      = wooden_door
 											 GenericOnStatic.as;
 f32 health                                 = 3.5
 # looks & behaviour inside inventory
-$inventory_name                            = Aluminum Door
+$inventory_name                            = Wooden Door
 $inventory_icon                            = -
 u8 inventory_icon_frame                    = 0
 u8 inventory_icon_frame_width              = 0

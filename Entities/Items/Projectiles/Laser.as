@@ -177,7 +177,7 @@ void onCollision( CBlob@ this, CBlob@ blob, bool solid, Vec2f normal, Vec2f poin
 		string laserType = this.getName();
 		f32 damage = 0;
 		if(laserType == "laserwasp"){
-			damage = 0.5f;
+			damage = 0.75f;
 		}
 		
 		f32 dmg = blob.getTeamNum() == this.getTeamNum() ? 0.0f : damage;
@@ -331,7 +331,7 @@ void ArrowHitMap( CBlob@ this, Vec2f worldPoint, Vec2f velocity, f32 damage, u8 
 	TileType t = map.getTile(worldPoint).type;
 
 	
-	if(map.isTileCastle(t) && XORRandom(3) == 0 || map.isTileWood(t) && XORRandom(2) == 0)
+	if(map.isTileCastle(t) && XORRandom(2) == 1 || map.isTileWood(t) && XORRandom(3) > 0)
 		map.server_DestroyTile(worldPoint, 0.1f, this);
 
 	this.server_Die();

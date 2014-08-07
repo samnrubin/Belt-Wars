@@ -12,8 +12,7 @@ const s32 cost_ballista = 150;
 const s32 cost_ballista_ammo = 30;
 const s32 cost_ballista_ammo_upgrade_gold = 60;
 const s32 cost_balloon = 100;
-const s32 cost_wasp = 150;
-const s32 cost_wasp_uranium = 75;
+const s32 cost_wasp = 180;
 
 void onInit( CBlob@ this )
 {	 
@@ -37,7 +36,6 @@ void onInit( CBlob@ this )
 		ShopItem@ s = addShopItem( this, "Wasp", "$wasp$", "wasp", "A personal spacecraft", false, true );
 		s.crate_icon = 4;
 		AddRequirement( s.requirements, "coin", "", "Coins", cost_wasp );
-		AddRequirement( s.requirements, "blob", "mat_gold", "Uranium", cost_wasp_uranium );
 	}
 
 	/*{
@@ -70,6 +68,8 @@ void onInit( CBlob@ this )
 		AddRequirement( s.requirements, "blob", "mat_wood", "Wood", 500);
 		AddRequirement( s.requirements, "coin", "", "Coins", cost_balloon);
 	}*/
+
+
 }
 
 void GetButtonsFor(CBlob@ this, CBlob@ caller)
@@ -82,6 +82,7 @@ void onCommand( CBlob@ this, u8 cmd, CBitStream @params )
 	if (cmd == this.getCommandID("shop made item")) {
 		this.getSprite().PlaySound( "/ChaChing.ogg" );
 		bool isServer = (getNet().isServer());
+	
 		u16 caller, item;
 		if (!params.saferead_netid(caller) || !params.saferead_netid(item)) {
 			return;
@@ -92,6 +93,8 @@ void onCommand( CBlob@ this, u8 cmd, CBitStream @params )
 				GiveFakeTech(getRules(), "bomb ammo", this.getTeamNum());
 			}
 		}
+
+	
 	}
 }
 
