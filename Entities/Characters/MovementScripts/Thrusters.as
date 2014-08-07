@@ -141,7 +141,7 @@ void onTick( CMovement@ this )
 
 		}
 		
-		if(getGameTime() - blob.get_u32("afterburntime") == afterburnerKickinTime){
+		if(getGameTime() - blob.get_u32("afterburntime") == afterburnerKickinTime && afterburning){
 			//makeSmallExplosionParticle(pos);
 			blob.getSprite().PlaySound("Bomb.ogg", 0.40);
 			//blob.getSprite().PlaySound("thud.ogg", 1.0);
