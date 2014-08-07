@@ -150,6 +150,7 @@ void onTick( CMovement@ this )
 			distance.Normalize();
 			blob.setVelocity(distance * afterburnSpeed);
 			blob.set_u32("switchTime", getGameTime() - burnSwitch);
+			blob.set_Vec2f("oldaim", distance);
 		}
 
 		if(blob.getName() == "archer"){
@@ -219,12 +220,7 @@ void onTick( CMovement@ this )
 
 			if(getGameTime() % 5 == 0){
 				Vec2f oldaim;
-				if(!blob.exists("oldaim")){
-					oldaim = distance;
-				}
-				else{
-					oldaim = blob.get_Vec2f("oldaim");
-				}
+				oldaim = blob.get_Vec2f("oldaim");
 				blob.set_Vec2f("oldaim", distance);
 				
 				if(Maths::Abs(distance.AngleWith(oldaim)) > 60){

@@ -149,7 +149,8 @@ void onTick( CMovement@ this )
 			Vec2f distance = blob.getAimPos() - pos;
 			distance.Normalize();
 			blob.setVelocity(distance * afterburnSpeed);
-			blob.set_u32("switchTime", getGameTime() - burnTime());
+			blob.set_u32("switchTime", getGameTime() - burnSwitch);
+			blob.Untag("directionchange");
 		}
 
 		if(blob.getName() == "archer"){
