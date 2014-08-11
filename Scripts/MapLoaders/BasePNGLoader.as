@@ -155,6 +155,11 @@ const SColor color_mook_spawner_10(0xff56062C);
 // tutorials
 const SColor color_dummy(0xffe78c43);
 
+// Belt Wars
+const SColor color_black_hole_medium(0xff661f87);
+const SColor color_black_hole_large(0xff641f85);
+const SColor color_large_gravity_generator(0xff21c137);
+
 enum WAROffset {
 	autotile_offset = 0,
 	tree_offset,
@@ -878,6 +883,23 @@ class PNGLoader
 		else if (pixel == color_dummy)
 		{
 			spawnBlob( map, "dummy", offset, 1, true);
+			offsets[autotile_offset].push_back( offset );
+		}
+		// SPACE BASED BARBS
+		else if (pixel == color_black_hole_medium)
+		{
+			spawnBlob( map, "mediumblackhole", offset, -1);
+			offsets[autotile_offset].push_back( offset );
+		}
+		else if (pixel == color_black_hole_large)
+		{
+			spawnBlob( map, "largeblackhole", offset, -1);
+			offsets[autotile_offset].push_back( offset );
+		}
+		else if (pixel == color_large_gravity_generator)
+		{
+			CBlob @ grav = spawnBlob( map, "gravitygenerator", offset, -1);
+			grav.Tag("large");
 			offsets[autotile_offset].push_back( offset );
 		}
 		else 

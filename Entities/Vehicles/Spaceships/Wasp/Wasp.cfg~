@@ -1,4 +1,4 @@
-# Boat config file
+# Wasp config file
 # $ string
 # @ array
 
@@ -97,7 +97,7 @@ $inventory_factory                         =
 
 # general
 
-$name                                      = wasp
+$name                                      = mediumblackhole
 @$scripts                              = 
 										 ShipRiding.as;
 										 Seats.as;

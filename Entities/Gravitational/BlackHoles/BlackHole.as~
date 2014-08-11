@@ -1,0 +1,3 @@
+void onTick(CBlob@ this){
+	return;
+}

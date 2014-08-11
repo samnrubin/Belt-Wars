@@ -5,8 +5,8 @@
 $sprite_factory                                   = generic_sprite
 @$sprite_scripts                                  = CTF_Flag.as;
 $sprite_texture                                   = CTF_Flag.png
-s32_sprite_frame_width                            = 16
-s32_sprite_frame_height                           = 16
+s32_sprite_frame_width                            = 8
+s32_sprite_frame_height                           = 32
 f32 sprite_offset_x                               = 0
 f32 sprite_offset_y                               = -4
 
@@ -85,7 +85,7 @@ $name                                             = ctf_flag
 													BehindWhenAttached.as;
 f32_health                                        = 1.0
 # looks & behaviour inside inventory
-$inventory_name                                   = AI Core
+$inventory_name                                   = Very Important Flag
 $inventory_icon                                   = CTFGui.png
 u8 inventory_icon_frame                           = 0
 u8 inventory_icon_frame_width                     = 16
