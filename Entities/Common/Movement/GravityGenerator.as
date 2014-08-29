@@ -1,3 +1,5 @@
+#include "DebugSuite.as"
+
 void onInit(CBlob@ this){
 	calculateField(this);
 
@@ -34,29 +36,61 @@ void onTick (CBlob@ this){
 	}
 
 	if(this.hasTag("gravityGeneratorVertical")){
-		this.getCurrentScript().tickFrequency = 30;
+		if(this.hasTag("moveable")){
+			Vec2f pos = this.getPosition();
+			CBlob@[] blobs;
+			f32 radius = 8 * this.get_u8("grav_radius");
+			f32 width = this.getWidth();
+			f32 height = this.getHeight();
+			getMap().getBlobsInRadius( pos, radius, @blobs );
+			for(uint i = 0; i < blobs.length; i++){
+				CBlob@ blob = blobs[i];
+				Vec2f blobPos = blobs[i].getPosition();
+				/*if(!(blob.getName() == this.getName())){
+					print("inradius");
+				}*/
+				if(this.hasTag("team_gravity") && blob.getTeamNum() == this.getTeamNum()){
+					continue;
+				}
+				if(!(blob.hasTag("gravity") || blob.hasTag("gravityVertical")) &&
+					Maths::Abs(blobPos.x - pos.x) <= width / 2 &&
+					(pos.y + height/2) + 8 >= blobPos.y 
+				){
+					blob.Tag("gravityVertical");
+					blob.set_netid("generator", this.getNetworkID());
+				}
 
-		
-		CBlob@[] blobs;
-		Vec2f ul = this.get_Vec2f("ul");
-		Vec2f lr = this.get_Vec2f("lr");
-		getMap().getBlobsInBox( ul, lr, @blobs );
-		for(uint i = 0; i < blobs.length; i++){
-			CBlob@ blob = blobs[i];
-			Vec2f blobPos = blobs[i].getPosition();
-			/*if(!(blob.getName() == this.getName())){
-				print("inradius");
-			}*/
-			if((this.hasTag("team_gravity") && blob.getTeamNum() == this.getTeamNum()) ||
-				blob.getShape().isStatic() || blob.hasTag("gravityVertical") ){
-				continue;
+
 			}
+		
 
-			blob.Tag("gravityVertical");
-			blob.set_netid("generator", this.getNetworkID());
+		}
+		else{
+			this.getCurrentScript().tickFrequency = 30;
+
+			
+			CBlob@[] blobs;
+			Vec2f ul = this.get_Vec2f("ul");
+			Vec2f lr = this.get_Vec2f("lr");
+			getMap().getBlobsInBox( ul, lr, @blobs );
+			for(uint i = 0; i < blobs.length; i++){
+				CBlob@ blob = blobs[i];
+				Vec2f blobPos = blobs[i].getPosition();
+				/*if(!(blob.getName() == this.getName())){
+					print("inradius");
+				}*/
+				if((this.hasTag("team_gravity") && blob.getTeamNum() == this.getTeamNum()) ||
+					blob.getShape().isStatic() || blob.hasTag("gravityVertical") ){
+					continue;
+				}
+
+				blob.Tag("gravityVertical");
+				blob.set_netid("generator", this.getNetworkID());
+			}
 		}
 	}
 	else if(this.hasTag("gravityGeneratorRadius")){
+		bool storage = this.getName() == "storage";
 		this.getCurrentScript().tickFrequency = 1;
 		Vec2f center = this.getPosition();
 		CBlob@[] blobs;
@@ -66,6 +100,9 @@ void onTick (CBlob@ this){
 				for(uint i = 0; i < blobs.length; i++){
 					CBlob@ blob = blobs[i];
 					if(!blob.getShape().isStatic() && blob.getName() != "ctf_flag" ){
+						if(storage && (!blob.hasTag("material") || blob.getName() == "mat_arrows")){
+							continue;
+						}
 
 						// Calculate the pull using the base proportion mass of a knight
 						Vec2f distance = blob.getPosition() - center;
@@ -85,7 +122,7 @@ void onTick (CBlob@ this){
 						
 						// Gravity effects
 						distance.Normalize();
-						if(dist < radius / 4.0 && this.getName() != "storage"){
+						if(dist < radius / 4.0 && !storage){
 							blob.server_Die();
 						}
 						else if(dist < radius){

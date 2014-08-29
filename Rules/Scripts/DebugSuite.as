@@ -18,3 +18,7 @@ void p(string title, int toPrint){
 	print(title + ": " + num);
 }
 
+void p(CBlob@ blob){
+	print(blob.getName());
+}
+

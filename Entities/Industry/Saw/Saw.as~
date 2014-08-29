@@ -1,6 +1,7 @@
 // Saw logic
 
 #include "Hitters.as"
+#include "DebugSuite.as"
 
 const string toggle_id = "toggle_power";
 const string sawteammate_id = "sawteammate";
@@ -16,6 +17,7 @@ void onInit( CBlob@ this )
 	this.Tag("team_gravity");
 	this.Tag("gravityGeneratorVertical");
 	this.Tag("gravOn");
+	this.Tag("moveable");
 
 	SetSawOn(this, true);
 }

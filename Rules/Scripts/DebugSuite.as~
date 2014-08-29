@@ -12,9 +12,13 @@ void c(string title, Vec2f toPrint){
 	client_AddToChat(title + " = " + "x:" + x + " y:" + y);
 }
 
-void p(string title, int num){
-	string num = formatInt(num, "");
+void p(string title, int toPrint){
+	string num = formatInt(toPrint, "");
 
 	print(title + ": " + num);
+}
+
+void p(Cblob@ blob){
+	print(blob.getName());
 }
 

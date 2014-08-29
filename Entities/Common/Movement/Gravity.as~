@@ -1,4 +1,3 @@
-#include "DebugSuite.as";
 
 void onInit(CBlob@ this){
 	this.getCurrentScript().tickFrequency = 30;
@@ -18,6 +17,7 @@ void onTick(CBlob@ this){
 			this.Untag("fullgravity");
 			return;
 		}
+		print("WTF");
 
 		Vec2f ul = generator.get_Vec2f("ul");
 		Vec2f lr = generator.get_Vec2f("lr");

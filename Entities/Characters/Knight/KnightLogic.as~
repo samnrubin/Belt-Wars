@@ -191,7 +191,7 @@ void onTick( CBlob@ this )
 				moveVars.stoppingFactor *= 0.5f;
 				
                 if (vel.y > -1.0f && this.hasTag("fullgravity")) {
-                    this.AddForce(Vec2f( 0,-5.0f));
+                    this.AddForce(Vec2f( 0,-20.0f));
                 }
 
                 if (!inair || !pressed_a2) {

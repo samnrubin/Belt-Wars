@@ -11,12 +11,12 @@ void onInit( CBlob@ this )
 
 	this.addCommandID(toggle_id);
 	this.addCommandID(sawteammate_id);
-	this.set_u8("grav_width", this.getWidth()); 
-	this.set_u8("grav_height", 12);
+	this.set_u8("grav_radius", 12);
 	this.set_f32("grav_generator_intensity", 0.4);
 	this.Tag("team_gravity");
 	this.Tag("gravityGeneratorVertical");
 	this.Tag("gravOn");
+	this.Tag("moveable");
 
 	SetSawOn(this, true);
 }

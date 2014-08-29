@@ -1,6 +1,6 @@
 void onInit(CBlob@ this){
 	this.getShape().SetStatic(true);
-	this.getSprite().SetZ(-50);
+	this.getSprite().SetZ(-60);
 	this.getShape().getConsts().mapCollisions = false;
 	this.getCurrentScript().tickFrequency = 10;
 	this.Tag("blackHole");
@@ -14,5 +14,5 @@ void onInit(CBlob@ this){
 	else
 		gravRadius = 128.0;
 		
-	this.set_f32("grav_radius", gravRadius / 2);
+	this.set_f32("grav_radius", gravRadius * 3 / 4);
 }

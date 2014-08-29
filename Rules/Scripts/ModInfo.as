@@ -29,23 +29,35 @@ string[] chats = {"Coming soon: AI Controlled Space Stations",
 				 "Want to design new maps? Belt Wars uses the same map palette as regular CTF, so send me the files on the forum",
 				 "Want to design new maps? Belt Wars uses the same map palette as regular CTF, so send me the files on the forum",
 				 "You can rebind your afterburner key in the settings, just change what key \"taunts\" is set to",
+				 "Control your afterburner with the mouse!",
+				 "Control your afterburner with the mouse!",
+				 "Control your afterburner with the mouse!",
 				 "Press P to see the intro text again",
 				 "Press L to view the change log"
 				 };
 
 int lastPick = 0;
 
-string tutorialMain = "Welcome to Belt Wars v.(0.65)\n\n" +
+string tutorialMain = "Welcome to Belt Wars v.(0.75)\n\n" +
 					  "ATTENTION: RP is allowed but this is not an RP server\n" +
 					  "Attemping to kick someone for not respecting \"peace\"\n"
-					  "will earn YOU a ban, not them\n\n"
-					  "Enter/exit spaceships with \'E\'\n\n" +
+					  "will earn YOU a PERMABAN\n\n"
+					  "Enter/exit spaceships with \'E\' or \'s\'\n\n" +
 					  "Activate your afterburner with your \"taunts\" key\n" +
-					  "Default is 'V', but it can be changed in settings\n\n" +
+					  "Default is 'V', but it can be changed in settings\n" +
+					  "Control your afterburner with your mouse :D\n\n" +
 					  "Press L to view the change log\n\n\n" +
 					  "PRESS P TO DISMISS/BRING BACK THIS DIALOG";
 
-string changelog = "V. 0.65\n" +
+string changelog = "V. 0.75\n" +
+				   "Flags resprited\n" + 
+				   "Black Holes added\n" + 
+				   "Standard gravity map generators added\n" + 
+				   "Full gravity movement system w/ booster system added\n" + 
+				   "New knight sprites added (based Cubone)\n" +
+				   "Bomb radius increased and explosion reworked\n" +
+				   "Four new maps added, including the first\nuser submitted map! Thanks voper45!\n" +
+				   "\nV. 0.65\n" +
 				   "Afterburners totally reworked, now mouse controlled\n" +
 				   "Wasp rebalances:Increased health, damage, explosion\n" +
 				   "tile damage\n" +
@@ -94,7 +106,7 @@ void onTick(CRules@ this){
 
 	if(lastMessageTime == 0){
 		lastMessageTime = getGameTime();
-		client_AddToChat("Welcome to Belt Wars! v.(0.61)", M_COLOR);
+		client_AddToChat("Welcome to Belt Wars! v.(0.75)", M_COLOR);
 		client_AddToChat("Design and coding by Nand, spriting by Nand/Cubone", M_COLOR);
 	}
 

@@ -15,6 +15,8 @@ bool canPickupFlag(CBlob@ blob)
 			pick = true;
 		}
 	}
+
+	if(blob.hasTag("inship")) pick = false;
 	
 	
 	return pick;

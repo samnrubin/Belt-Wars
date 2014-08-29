@@ -18,25 +18,41 @@ void onTick(CBlob@ this){
 			return;
 		}
 
-		Vec2f ul = generator.get_Vec2f("ul");
-		Vec2f lr = generator.get_Vec2f("lr");
+		if(generator.hasTag("moveable")){
+			f32 radius = 8 * generator.get_u8("grav_radius");
+			f32 width = generator.getWidth();
 
-		Vec2f pos = this.getPosition();
-		
-		/*if(this.hasTag("player")){
-			c("player", this.getPosition());
-			c("lr", lr);
-		}*/
+			if(Maths::Abs(generator.getPosition().x - this.getPosition().x) > width / 2 || 
+			   this.getDistanceTo(generator) > radius){
+				this.Untag("gravityVertical");
+				return;
+			}
+			/*if(this.hasTag("player")){
+				print("gravcheck");
+			}*/
 
 
-		if(pos.x < ul.x || pos.x > lr.x || pos.y < ul.y || pos.y > lr.y){
-			this.Untag("gravityVertical");
-			this.Untag("fullgravity");
-			return;
+		}else{
+
+			Vec2f ul = generator.get_Vec2f("ul");
+			Vec2f lr = generator.get_Vec2f("lr");
+
+			Vec2f pos = this.getPosition();
+			
+			/*if(this.hasTag("player")){
+				c("player", this.getPosition());
+				c("lr", lr);
+			}*/
+
+
+			if(pos.x < ul.x || pos.x > lr.x || pos.y < ul.y || pos.y > lr.y){
+				this.Untag("gravityVertical");
+				this.Untag("fullgravity");
+				return;
+			}
 		}
 
 
-		CShape@ shape = this.getShape();
 		f32 intensity = generator.get_f32("grav_generator_intensity");
 		if(intensity >= 0.6){
 			this.Tag("fullgravity");
@@ -47,6 +63,7 @@ void onTick(CBlob@ this){
 							
 		}
 
+		CShape@ shape = this.getShape();
 		shape.SetGravityScale(intensity);
 
 	}
