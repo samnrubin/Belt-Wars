@@ -898,7 +898,7 @@ class PNGLoader
 		}
 		else if (pixel == color_large_gravity_generator)
 		{
-			CBlob @ grav = spawnBlob( map, "gravitygenerator", offset, -1);
+			CBlob @ grav = spawnBlob( map, "gravitygenerator", offset, -1, true);
 			grav.Tag("large");
 			offsets[autotile_offset].push_back( offset );
 		}

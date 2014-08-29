@@ -298,6 +298,7 @@ $name                                             = knight
 													StandardControls.as;
 													StandardPickup.as;
 													Gravity.as;
+													ShipEffects.as;
 													ActivateHeldObject.as;
 													RunnerActivateable.as;
 													DetectLadder.as; #resets ladder, put before other code that uses ladder
@@ -327,7 +328,6 @@ $name                                             = knight
 													UnSpawnImmunity.as;
 													TauntAI.as;
 													EmoteBubble.as;
-													ShipEffects.as;
 													RunnerDrowning.as; # after redflash so it overrides the flash
 													FleshHit.as; # this gibs so leave it last
 													RunnerDeath.as; # this checks for "dead" so leave it last   

@@ -22,7 +22,7 @@ void addCommonBuilderBlocks( BuildBlock[]@ blocks )
 	{   // stone_door
 		BuildBlock b( 0, "stone_door", "$stone_door$",
 						"Steel Door\nPlace next to walls" );
-		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 50 );
+		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 100 );
 		blocks.push_back( b );
 	}    
 
@@ -41,7 +41,7 @@ void addCommonBuilderBlocks( BuildBlock[]@ blocks )
 	{   // wooden_door
 		BuildBlock b( 0, "wooden_door", "$wooden_door$",
 						"Aluminum Door\nPlace next to walls" );
-		AddRequirement( b.reqs, "blob", "mat_wood", "Aluminum", 30 );
+		AddRequirement( b.reqs, "blob", "mat_wood", "Aluminum", 70 );
 		blocks.push_back( b );
 	}
 

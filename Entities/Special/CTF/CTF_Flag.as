@@ -77,7 +77,7 @@ void onTick( CBlob@ this )
 void onInit( CSprite@ this )
 {
 	this.SetZ(-10.0f);
-    CSpriteLayer@ flag = this.addSpriteLayer( "flag_layer", "/CTF_Flag.png", 32, 16, this.getBlob().getTeamNum(), this.getBlob().getSkinNum() );
+    /*CSpriteLayer@ flag = this.addSpriteLayer( "flag_layer", "/CTF_Flag.png", 32, 16, this.getBlob().getTeamNum(), this.getBlob().getSkinNum() );
 
     if (flag !is null)
     {
@@ -93,7 +93,7 @@ void onInit( CSprite@ this )
 	if (this.getBlob().getTeamNum() == 0)
 	{
 		this.getBlob().SetFacingLeft(true );
-	}
+	}*/
 }
 
 // alert and capture progress bar

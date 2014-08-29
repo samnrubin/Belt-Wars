@@ -6,7 +6,7 @@ void onInit(CBlob@ this)
 {
 	this.Tag("gravityGeneratorVertical");
 		this.set_u8("grav_width", 50.0); 
-		this.set_u8("grav_height", 150.0); 
+		this.set_u8("grav_height", 100.0); 
 		this.set_f32("grav_generator_intensity", 1.0);
 		this.Tag("gravOn");
 		this.Untag("large");

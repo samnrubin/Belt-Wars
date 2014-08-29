@@ -97,9 +97,9 @@ $inventory_factory                         =
 
 # general
 
-$name                                      = mediumblackhole
+$name                                      = wasp
 @$scripts                              = 
-										 ShipRiding.as;
+										 SpaceshipCommon.as;
 										 Seats.as;
 										 Wooden.as;
 										# DecayOnLand.as;

@@ -46,13 +46,18 @@ bool canAfterburn(CBlob@ this){
 void onTick( CMovement@ this )
 {
 	CBlob@ blob = this.getBlob();
+	Vec2f vel = blob.getVelocity();
+	if(blob.hasTag("fullgravity") && vel.y <= 0 ){
+		return;
+	}
+
 	Vec2f pos = blob.getPosition();
 
 	thrustedOut(blob);
 	f32 fuel = blob.get_f32("fuel");
 
-	f32 vely = Maths::Abs(blob.getVelocity().y);
-    f32 velx = Maths::Abs(blob.getVelocity().x);
+	f32 vely = Maths::Abs(vel.y);
+    f32 velx = Maths::Abs(vel.x);
 
 	f32 topvel = velx > vely ? velx : vely;
 

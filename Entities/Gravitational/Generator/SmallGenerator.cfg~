@@ -58,10 +58,10 @@ bool shape_platform                        = no
  #block_collider
 @f32 verticesXY                            = 0.0; 0.0; 
 			   								 8.0; 0.0;
-											 8.0; 2.0;
-											 0.0; 2.0;
+											 8.0; 8.0;
+											 0.0; 8.0;
 u8 block_support                           = 1
-bool block_background                      = yes
+bool block_background                      = no
 bool block_lightpasses                     = no
 bool block_snaptogrid                      = yes
 
@@ -78,7 +78,7 @@ $inventory_factory                         =
 
 # general
 
-$name                                      = gravity generator
+$name                                      = gravitygenerator
 @$scripts                                  = PhysicalGen.as;
 											 GravityGenerator.as;
 											 StoneStructureHit.as;

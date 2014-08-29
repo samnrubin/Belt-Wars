@@ -888,23 +888,29 @@ class PNGLoader
 		// SPACE BASED BARBS
 		else if (pixel == color_black_hole_medium)
 		{
-			spawnBlob( map, "mediumblackhole", offset, -1);
+			spawnBlob( map, "mediumblackhole", offset, -1, true);
 			offsets[autotile_offset].push_back( offset );
 		}
 		else if (pixel == color_black_hole_large)
 		{
-			spawnBlob( map, "largeblackhole", offset, -1);
+			spawnBlob( map, "largeblackhole", offset, -1, true);
 			offsets[autotile_offset].push_back( offset );
 		}
 		else if (pixel == color_large_gravity_generator)
 		{
-			CBlob @ grav = spawnBlob( map, "gravitygenerator", offset, -1);
-			grav.tag("large");
+			CBlob @ grav =  server_CreateBlobNoInit("gravitygenerator");
+			if(grav !is null){
+				grav.Tag("large");
+				grav.Tag("static");
+				grav.setPosition( getSpawnPosition( map, offset ) );
+				grav.Init();
+			}
 			offsets[autotile_offset].push_back( offset );
 		}
 		else 
 			HandleCustomTile( map, offset, pixel );
 	}
+
 	
 	//override this to add post-load offset types.
 	void handleOffset(int type, int offset, int position, int count)

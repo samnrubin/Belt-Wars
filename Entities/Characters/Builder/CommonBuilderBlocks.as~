@@ -70,4 +70,11 @@ void addCommonBuilderBlocks( BuildBlock[]@ blocks )
 		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 30 );
 		blocks.push_back( b );
 	}
+
+	{   // gravity generator
+		BuildBlock b( 0, "smallgravitygenerator", "$smallgravitygenerator$",
+						"Gravity Generator\nGenerates a 5 tile-wide gravity radius" );
+		AddRequirement( b.reqs, "blob", "mat_stone", "Iron", 100 );
+		blocks.push_back( b );
+	}
 }

@@ -110,7 +110,7 @@ void onTick(CMovement@ this){
 					laser.setPosition( blob.getPosition() + fireOffset );
 					//print(formatFloat(firePos.x, ""));
 					f32 velocityx = blob.isFacingLeft() ? -10 : 10;
-					laser.setVelocity( Vec2f(velocityx, 0) );
+					laser.setVelocity( Vec2f(blob.getVelocity().x + velocityx, 0) );
 					blob.set_u32("lastfired", getGameTime());
 				}
 			}

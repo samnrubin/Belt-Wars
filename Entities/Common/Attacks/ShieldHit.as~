@@ -89,7 +89,7 @@ f32 onHit( CBlob@ this, Vec2f worldPoint, Vec2f velocity, f32 damage, CBlob@ hit
 	
 	// Destroy lasers
 	if(customData == Hitters::muscles){
-		hitterBlob.server_Die();
+		hitter_blob.server_Die();
 	}
 
     return damage; //no block, damage goes through

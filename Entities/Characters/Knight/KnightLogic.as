@@ -190,9 +190,9 @@ void onTick( CBlob@ this )
             {
 				moveVars.stoppingFactor *= 0.5f;
 				
-                /*if (vel.y > -1.0f) {
+                if (vel.y > -1.0f && this.hasTag("fullgravity")) {
                     this.AddForce(Vec2f( 0,-20.0f));
-                }*/
+                }
 
                 if (!inair || !pressed_a2) {
                     knight.state = KnightStates::shielding;
@@ -286,10 +286,10 @@ void onTick( CBlob@ this )
         moveVars.walkFactor *= ( strong ? 0.8f : 0.9f);
 		knight.shieldTimer = 0;
 
-        /*if (!inair)
+        if (!inair && this.hasTag("fullgravity"))
 		{
             this.AddForce(Vec2f(vel.x * -5.0,0.0f));    //horizontal slowing force (prevents SANICS)
-        }*/
+        }
 
         if ( knight.state == KnightStates::normal ||
 			this.isKeyJustPressed(key_action1) &&

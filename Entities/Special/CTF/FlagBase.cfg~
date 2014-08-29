@@ -63,7 +63,7 @@ $brain_factory                             =
 $attachment_factory                        = box2d_attachment
 @$attachment_scripts                              = 
 # name; pixel offset (from center) X; offset Y; socket/plug 0/1; controller; radius
-@$attachment_points                        = FLAG; 1; 3; 0; 0; 0;
+@$attachment_points                        = FLAG; 0; 3; 0; 0; 0;
 
 $inventory_factory                         = 	
 
